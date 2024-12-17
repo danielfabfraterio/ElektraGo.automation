@@ -1,0 +1,5 @@
+com/elektrago/utils/iOSUtils.class
+com/elektrago/utils/AndroidUtils.class
+com/elektrago/runner/RunFeature.class
+com/elektrago/stepDefinitions/LoginStepDefinitions.class
+com/elektrago/utils/AppiumDriverFactory.class
