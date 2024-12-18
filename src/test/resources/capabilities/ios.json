@@ -1,0 +1,10 @@
+{
+  "platformName": "iOS",
+  "platformVersion": "18.1.1",
+  "deviceName": "iPhone 13 Pro",
+  "automationName": "XCUITest",
+  "udid": "00008110-001411E93453801E",
+  "bundleId": "com.elektrago.elektrago",
+  "noReset": true,
+  "fullReset": false
+}

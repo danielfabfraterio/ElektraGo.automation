@@ -1,63 +1,57 @@
 package com.elektrago.utils;
-
-
+import com.elektrago.pages.DeviceCapabilities;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.File;
+import java.io.IOException;
 
 public class AppiumDriverFactory {
-    private static AppiumDriver androidDriver;
-    private static AppiumDriver iosDriver;
+    private static AppiumDriver driver;
 
-    public static AppiumDriver getAndroidDriver() {
-        if (androidDriver == null) {
-            androidDriver = createAndroidDriver();
-        }
-        return androidDriver;
+    public static AppiumDriver getDriver(String platform) {
+                if (driver== null){
+                    driver = createDriver(platform);
+                }
+        return driver;
     }
 
-    public static AppiumDriver createAndroidDriver(){
+    public static AppiumDriver createDriver(String platform){
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        // Configuración de capabilities para Android
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "Pixel_5");
-        capabilities.setCapability("automationName", "UiAutomator2");
-        capabilities.setCapability("appium:fullReset", false);
-        capabilities.setCapability("appium:noReset", true);
+        // Se obtiene JSON de los capabilities
+        File jsonFile = new File("src/test/resources/capabilities/"+platform+".json");
 
-        return new AndroidDriver(capabilities);
-    }
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            DeviceCapabilities deviceCapabilities = objectMapper.readValue(jsonFile,DeviceCapabilities.class);
+            if (platform.equalsIgnoreCase("android")){
+                // Configuración de capabilities para Android
+                capabilities.setCapability("platformName", deviceCapabilities.getPlatformName());
+                capabilities.setCapability("deviceName", deviceCapabilities.getDeviceName());
+                capabilities.setCapability("automationName", deviceCapabilities.getAutomationName());
+                capabilities.setCapability("appium:fullReset", deviceCapabilities.getFullReset());
+                capabilities.setCapability("appium:noReset", deviceCapabilities.getNoReset());
+            } else if (platform.equalsIgnoreCase("ios")) {
+                // Configuración de capabilities para iOS
+                capabilities.setCapability("platformName", "iOS");
+                capabilities.setCapability("deviceName", "iPhone 14");
+                capabilities.setCapability("platformVersion", "16.0");
+                capabilities.setCapability("automationName", "XCUITest");
+                capabilities.setCapability("appium:bundleId", "");
 
-    public static AppiumDriver getiOSDriver(){
-        if (iosDriver == null) {
-            iosDriver = createiOSDriver();
+                capabilities.setCapability("appium:fullReset", false);
+                capabilities.setCapability("appium:noReset", true);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
         }
-        return iosDriver;
-    }
-
-    public static AppiumDriver createiOSDriver(){
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        // Configuración de capabilities para iOS
-        capabilities.setCapability("platformName", "iOS");
-        capabilities.setCapability("deviceName", "iPhone 14");
-        capabilities.setCapability("platformVersion", "16.0");
-        capabilities.setCapability("automationName", "XCUITest");
-        capabilities.setCapability("appium:fullReset", false);
-        capabilities.setCapability("appium:noReset", true);
-
-        return new IOSDriver(capabilities);
+        return new AppiumDriver(capabilities);
     }
 
     public static void quitDriver() {
-        if (androidDriver != null) {
-            androidDriver.quit();
-            androidDriver = null;
-        }
-        if (iosDriver != null) {
-            iosDriver.quit();
-            iosDriver = null;
+       if (driver != null) {
+            driver.quit();
         }
     }
 }

@@ -1,0 +1,11 @@
+{
+  "platformName": "Android",
+  "platformVersion": "14",
+  "deviceName": "Samsung S23+",
+  "automationName": "UiAutomator2",
+  "udid": "R5CW129MZ2Y",
+  "appPackage": "com.elektrago.elektrago",
+  "appActivity": "CoverActivity",
+  "noReset": true,
+  "fullReset": false
+}
