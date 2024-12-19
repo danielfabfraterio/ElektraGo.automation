@@ -1,5 +1,7 @@
 package com.elektrago.pages.cover;
 
+import com.elektrago.utils.BaseUtils;
+import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -15,7 +17,7 @@ public class CoverPage {
     @AndroidFindBy(id = "com.elektrago.elektrago:id/title")
     public WebElement txtTitle;
 
-    @AndroidBy(id= "com.elektrago.elektrago:id/loginBtn")
+    @AndroidBy(xpath= "com.elektrago.elektrago:id/loginBtn")
     public WebElement btnSignUpLogIn;
 
     @AndroidBy(id = "com.elektrago.elektrago:id/explore_app_btn")
@@ -26,9 +28,17 @@ public class CoverPage {
     }
 
     public void validationCoverPage(){
-        logoElektraGo.isDisplayed();
-        txtTitle.isDisplayed();
-        btnSignUpLogIn.isDisplayed();
-        btnExploreApp.isDisplayed();
+        BaseUtils.waitUntilElementisPresent(logoElektraGo);
+        Assert.isTrue(logoElektraGo.isDisplayed(), "Elemento no esta presente");
+        BaseUtils.waitUntilElementisPresent(txtTitle);
+        Assert.isTrue(txtTitle.isDisplayed(),"Elemento no esta presente");
+        BaseUtils.waitUntilElementisPresent(btnSignUpLogIn);
+        Assert.isTrue(btnSignUpLogIn.isDisplayed(),"Elemento no esta presente");
+        BaseUtils.waitUntilElementisPresent(btnExploreApp);
+        Assert.isTrue(btnExploreApp.isDisplayed(),"Elemento no esta presente");
+    }
+
+    public void tapOnSignupLogin(){
+        btnSignUpLogIn.click();
     }
 }

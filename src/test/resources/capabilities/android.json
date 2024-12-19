@@ -5,7 +5,7 @@
   "automationName": "UiAutomator2",
   "udid": "R5CW129MZ2Y",
   "appPackage": "com.elektrago.elektrago",
-  "appActivity": "CoverActivity",
+  "appActivity": "SplashActivity",
   "noReset": true,
   "fullReset": false
 }

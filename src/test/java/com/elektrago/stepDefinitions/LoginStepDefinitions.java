@@ -5,6 +5,8 @@ import com.elektrago.utils.AppiumDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.*;
 
+import java.net.MalformedURLException;
+
 public class LoginStepDefinitions {
     AppiumDriver driver;
     CoverPage coverPage;
@@ -12,12 +14,12 @@ public class LoginStepDefinitions {
     @Given("the app on {string}")
     public void theAppon(String device){
         driver = AppiumDriverFactory.createDriver(device);
+        System.out.println(driver);
         coverPage = new CoverPage(driver);
-        coverPage.validationCoverPage();
     }
     @When("the user tap on Register or log in")
     public void theUserTapOnRegisterOrLogIn() {
-        coverPage.btnSignUpLogIn.click();
+        coverPage.tapOnSignupLogin();
     }
     @Then("the Sign up Lite is shows on the app")
     public void theSignUpLiteIsShowsOnTheApp() {
