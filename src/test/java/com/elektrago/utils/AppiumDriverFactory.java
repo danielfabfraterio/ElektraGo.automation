@@ -1,7 +1,6 @@
 package com.elektrago.utils;
 import com.elektrago.pages.DeviceCapabilities;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -16,6 +15,13 @@ public class AppiumDriverFactory {
         return driver;
     }
 
+    public static AppiumDriver getDriver(String platform) {
+        if(driver == null){
+            driver = createDriver(platform);
+        }
+        return driver;
+    }
+
     public static AppiumDriver createDriver(String platform){
         DesiredCapabilities capabilities = new DesiredCapabilities();
         // Se obtiene JSON de los capabilities
@@ -25,6 +31,7 @@ public class AppiumDriverFactory {
             DeviceCapabilities deviceCapabilities = objectMapper.readValue(jsonFile,DeviceCapabilities.class);
             capabilities.setCapability("platformName", deviceCapabilities.getPlatformName());
             capabilities.setCapability("appium:deviceName", deviceCapabilities.getDeviceName());
+            capabilities.setCapability("appium:udid", deviceCapabilities.getUdid());
             capabilities.setCapability("appium:automationName", deviceCapabilities.getAutomationName());
             capabilities.setCapability("appium:fullReset", deviceCapabilities.getFullReset());
             capabilities.setCapability("appium:noReset", deviceCapabilities.getNoReset());

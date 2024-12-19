@@ -1,10 +1,9 @@
 Feature: Login
 
   Scenario: Login Sucessfully
-    Given the app on "Android"
+    Given the app on "iOS"
     When the user tap on Register or log in
-    Then the Sign up Lite is shows on the app
-    And the user tap on the link log in here
+    Then the Login Page is shows on the app
     When the user fill up the email "pruebasektgo@gmail.com"
     And the password "Test2024!"
     When the user tap on the Log in button
