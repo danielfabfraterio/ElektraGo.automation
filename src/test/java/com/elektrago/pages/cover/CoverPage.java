@@ -3,7 +3,6 @@ package com.elektrago.pages.cover;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 import dev.failsafe.internal.util.Assert;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -29,7 +28,7 @@ public class CoverPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Explore the app\"`]")
     public WebElement btnExploreApp;
 
-    public CoverPage(String platform){
+    public CoverPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 

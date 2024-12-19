@@ -17,8 +17,8 @@ public class LoginStepDefinitions {
     @Given("the app on {string}")
     public void theAppon(String device){
         driver = AppiumDriverFactory.getDriver(device);
-        coverPage = new CoverPage(device);
-        //coverPage.validationCoverPage();
+        coverPage = new CoverPage();
+        coverPage.validationCoverPage();
     }
     @When("the user tap on Register or log in")
     public void theUserTapOnRegisterOrLogIn() {
