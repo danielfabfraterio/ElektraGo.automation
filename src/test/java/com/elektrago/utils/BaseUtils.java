@@ -8,10 +8,11 @@ import java.time.Duration;
 
 public class BaseUtils {
     protected static WebDriverWait explicitWait;
+    static final int SECONDS = 30;
 
     public static void waitUntilElementisPresent(WebElement element){
         if(explicitWait == null){
-            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(30));
+            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -27,10 +28,18 @@ public class BaseUtils {
 
     public static void waitUntilElementIsClickable(WebElement element){
         if(explicitWait == null){
-            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(30));
+            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public static void waitUntilElementIsSelected(WebElement element){
+        if(explicitWait == null){
+            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
+        }
+        explicitWait.until(ExpectedConditions.elementToBeSelected(element));
+    }
+
 
 
 }
