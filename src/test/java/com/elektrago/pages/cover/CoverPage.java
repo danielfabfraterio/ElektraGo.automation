@@ -16,6 +16,9 @@ public class CoverPage {
     @iOSXCUITFindBy(accessibility = "img_logo_elektrago_white")
     public WebElement logoElektraGo;
 
+    @iOSXCUITFindBy(accessibility = "hamburguer menu icon")
+    public WebElement iconMenuHamburger;
+
     @AndroidFindBy(id = "com.elektrago.elektrago:id/title")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"img_logo_elektrago_white\"]/following-sibling::XCUIElementTypeStaticText")
     public WebElement txtTitle;
@@ -35,6 +38,8 @@ public class CoverPage {
     public void validationCoverPage(){
         BaseUtils.waitUntilElementisPresent(logoElektraGo);
         Assert.isTrue(logoElektraGo.isDisplayed(), "Element is not present");
+        BaseUtils.waitUntilElementisPresent(iconMenuHamburger);
+        Assert.isTrue(iconMenuHamburger.isDisplayed(),"Element is not present");
         BaseUtils.waitUntilElementisPresent(txtTitle);
         Assert.isTrue(txtTitle.isDisplayed(),"Element is not present");
         BaseUtils.waitUntilElementisPresent(btnSignUpLogIn);

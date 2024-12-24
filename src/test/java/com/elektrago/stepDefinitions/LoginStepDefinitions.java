@@ -1,6 +1,7 @@
 package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.cover.CoverPage;
+import com.elektrago.pages.home.HomeLitePage;
 import com.elektrago.pages.login.LoginPage;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
@@ -13,12 +14,13 @@ public class LoginStepDefinitions {
     AppiumDriver driver;
     CoverPage coverPage;
     LoginPage loginPage;
+    HomeLitePage homeLitePage;
 
     @Given("the app on {string}")
     public void theAppon(String device){
         driver = AppiumDriverFactory.getDriver(device);
+        AppiumDriverFactory.setDevice(device);
         coverPage = new CoverPage();
-        coverPage.validationCoverPage();
     }
     @When("the user tap on Register or log in")
     public void theUserTapOnRegisterOrLogIn() {
@@ -31,17 +33,44 @@ public class LoginStepDefinitions {
     }
     @When("the user fill up the email {string}")
     public void theUserFillUpTheEmail(String email) {
+        loginPage.inputEmail.clear();
         BaseUtils.fillUpField(loginPage.inputEmail,email);
     }
     @And("the password {string}")
     public void thePassword(String password) {
-        BaseUtils.fillUpField(loginPage.inputEmail, password);
+        loginPage.inputPasswd.clear();
+        BaseUtils.fillUpField(loginPage.inputPasswd, password);
+        LoginPage.btnDoneKeyboard.click();
     }
     @When("the user tap on the Log in button")
     public void theUserTapOnTheLogInButton() {
         BaseUtils.clickOnElement(loginPage.btnLogin);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        AppiumDriverFactory.quitDriver();
     }
     @Then("the app shows the lite home page")
     public void theAppShowsTheLiteHomePage() {
+        homeLitePage = new HomeLitePage();
+        homeLitePage.validateHomeLite();
+    }
+
+    @And("the user tap the link to use mobile number")
+    public void theUserTapTheLinkToUseMobileNumber() {
+        BaseUtils.clickOnElement(loginPage.btnNumberInstead);
+    }
+
+    @And("the user fill up the mobile field with {string}")
+    public void theUserFillUpTheMobileFieldWith(String number) {
+        loginPage.inputMobileNumber.sendKeys(number);
+    }
+
+    @When("the user select the mobile code {string}")
+    public void theUserSelectTheMobileCode(String code) {
+        BaseUtils.clickOnElement(loginPage.dropDownMobileCode);
+        loginPage.selectMobileCode(code);
     }
 }
