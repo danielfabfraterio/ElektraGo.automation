@@ -25,8 +25,23 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Forgot password\"`]")
     public WebElement btnForgotPasswd;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Login\"`][2]")
+    @iOSXCUITFindBy(accessibility = "arrow down icon")
+    public WebElement dropDownMobileCode;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name,\"+52\")]")
+    public WebElement mexicanCodeNumber;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[contains(@name,\"+1\")]")
+    public WebElement americanCodeNumber;
+
+    @iOSXCUITFindBy(accessibility = "usernameTextfield")
+    public WebElement inputMobileNumber;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Login\"`]")
     public WebElement btnLogin;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`][1]")
+    public static WebElement btnDoneKeyboard;
 
     public LoginPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
@@ -44,4 +59,13 @@ public class LoginPage {
         BaseUtils.waitUntilElementisPresent(btnLogin);
         Assert.isTrue(btnLogin.isDisplayed(),"Element is not present");
     }
+
+    public void selectMobileCode(String mobileCode){
+        if (mobileCode.equals("+52")) {
+            BaseUtils.clickOnElement(mexicanCodeNumber);
+        } else {
+            BaseUtils.clickOnElement(americanCodeNumber);
+        }
+    }
+
 }
