@@ -1,7 +1,7 @@
 Feature: Login
 
   Scenario: Login Sucessfully with Email
-    Given the app on "Android"
+    Given the app on "iOS"
     When the user tap on Register or log in
     Then the Login Page is shows on the app
     When the user fill up the email "pruebasektgo@gmail.com"
@@ -10,7 +10,7 @@ Feature: Login
     #Then the app shows the lite home page
 
   Scenario: Login sucessfully with Mobile Number
-    Given the app on "Android"
+    Given the app on "iOS"
     When the user tap on Register or log in
     Then the Login Page is shows on the app
     And the user tap the link to use mobile number

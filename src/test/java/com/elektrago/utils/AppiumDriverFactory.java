@@ -10,6 +10,7 @@ import java.net.URL;
 
 public class AppiumDriverFactory {
     private static AppiumDriver driver;
+    private static String device;
 
     public static AppiumDriver getDriver() {
         return driver;
@@ -40,6 +41,7 @@ public class AppiumDriverFactory {
                 capabilities.setCapability("appium:appActivity", deviceCapabilities.getAppActivity());
             } else {
                 capabilities.setCapability("appium:bundleId", deviceCapabilities.getBundleId());
+                capabilities.setCapability("appium:usePrebuiltWDA", true);
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -55,5 +57,13 @@ public class AppiumDriverFactory {
        if (driver != null) {
             driver.quit();
         }
+    }
+
+    public static String getDevice() {
+        return device;
+    }
+
+    public static void setDevice(String device) {
+        AppiumDriverFactory.device = device;
     }
 }

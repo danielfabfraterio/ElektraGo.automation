@@ -37,8 +37,11 @@ public class LoginPage {
     @iOSXCUITFindBy(accessibility = "usernameTextfield")
     public WebElement inputMobileNumber;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Login\"`][2]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Login\"`]")
     public WebElement btnLogin;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`][1]")
+    public static WebElement btnDoneKeyboard;
 
     public LoginPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);

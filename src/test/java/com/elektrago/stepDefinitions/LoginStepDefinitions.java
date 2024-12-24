@@ -19,6 +19,7 @@ public class LoginStepDefinitions {
     @Given("the app on {string}")
     public void theAppon(String device){
         driver = AppiumDriverFactory.getDriver(device);
+        AppiumDriverFactory.setDevice(device);
         coverPage = new CoverPage();
     }
     @When("the user tap on Register or log in")
@@ -32,15 +33,24 @@ public class LoginStepDefinitions {
     }
     @When("the user fill up the email {string}")
     public void theUserFillUpTheEmail(String email) {
+        loginPage.inputEmail.clear();
         BaseUtils.fillUpField(loginPage.inputEmail,email);
     }
     @And("the password {string}")
     public void thePassword(String password) {
+        loginPage.inputPasswd.clear();
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
+        LoginPage.btnDoneKeyboard.click();
     }
     @When("the user tap on the Log in button")
     public void theUserTapOnTheLogInButton() {
         BaseUtils.clickOnElement(loginPage.btnLogin);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        AppiumDriverFactory.quitDriver();
     }
     @Then("the app shows the lite home page")
     public void theAppShowsTheLiteHomePage() {
