@@ -37,6 +37,9 @@ public class LoginPage {
     @iOSXCUITFindBy(accessibility = "usernameTextfield")
     public WebElement inputMobileNumber;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"info_red_Icon\"]/following-sibling::XCUIElementTypeStaticText")
+    public WebElement msgIncorrectuserNameOrPassENG;
+
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Login\"`]")
     public WebElement btnLogin;
 
