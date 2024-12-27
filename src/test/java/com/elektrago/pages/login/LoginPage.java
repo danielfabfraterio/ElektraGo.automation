@@ -56,6 +56,10 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`][1]")
     public static WebElement btnDoneKeyboard;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/walletOrNotLink")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")
+    public WebElement SignUpHere;
+
     public LoginPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
