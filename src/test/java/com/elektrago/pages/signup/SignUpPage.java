@@ -1,8 +1,6 @@
-package com.elektrago.pages;
+package com.elektrago.pages.signup;
 
 import com.elektrago.utils.AppiumDriverFactory;
-import com.elektrago.utils.BaseUtils;
-import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
