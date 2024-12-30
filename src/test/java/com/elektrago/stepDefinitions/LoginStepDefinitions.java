@@ -17,7 +17,7 @@ public class LoginStepDefinitions {
     HomeLitePage homeLitePage;
 
     @Given("the app on {string}")
-    public void theAppon(String device){
+    public void theAppOn(String device){
         driver = AppiumDriverFactory.getDriver(device);
         AppiumDriverFactory.setDevice(device);
         coverPage = new CoverPage();
