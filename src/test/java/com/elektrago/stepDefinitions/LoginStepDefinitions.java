@@ -5,6 +5,7 @@ import com.elektrago.pages.home.HomeLitePage;
 import com.elektrago.pages.login.LoginPage;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
+import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.*;
 
@@ -79,6 +80,12 @@ public class LoginStepDefinitions {
     public void theUserSelectTheMobileCode(String code) {
         BaseUtils.clickOnElement(loginPage.dropDownMobileCode);
         loginPage.selectMobileCode(code);
+    }
+
+    @Then("the app shows an error message related to username or password")
+    public void theAppShowsAnErrorMessageRelatedToEmailOrPassword() {
+        Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(),
+                "The element is not present on the screen");
     }
 
     @When("the user logs out")
