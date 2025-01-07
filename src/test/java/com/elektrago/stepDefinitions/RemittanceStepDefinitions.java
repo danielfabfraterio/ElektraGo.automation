@@ -13,11 +13,19 @@ public class RemittanceStepDefinitions {
     AppiumDriver driver;
     HomePage homePage;
 
-    @Given("the user fills up the amount to make the remittance on {string} for {string}")
-    public void theUserFillsUpTheAmountToMakeTheRemittance(String device, String amount){
+    @Given("on {string} the user selects country {string}")
+    public void theUserSelectsCountry(String device, String country) {
         driver = getDriver(device);
         homePage = new HomePage();
         homePage.validateHomePage();
+        BaseUtils.clickOnElement(homePage.btnSelectCountry);
+        BaseUtils.fillUpField(homePage.inputCountry, country);
+        homePage.btnFilteredCountry.click();
+    }
+
+    @Given("the user fills up the amount to make the remittance for {string}")
+    public void theUserFillsUpTheAmountToMakeTheRemittance(String amount) {
+        BaseUtils.waitUntilElementisPresent(homePage.inputSendAmount);
         BaseUtils.fillUpField(homePage.inputSendAmount, amount);
     }
 

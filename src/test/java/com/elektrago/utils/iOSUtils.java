@@ -1,4 +1,4 @@
 package com.elektrago.utils;
 
-public class iOSUtils extends BaseUtils{
+public class iOSUtils extends BaseUtils {
 }

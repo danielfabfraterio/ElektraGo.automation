@@ -1,0 +1,14 @@
+{
+    "users": [
+        {
+            "type": "wallet",
+            "email": "josue.roman@fraternitas.io",
+            "password": "Test2023!"
+        },
+        {
+            "type": "lite",
+            "email": "pruebasektgo@gmail.com",
+            "password": "Test2024!"
+        }
+    ]
+}
