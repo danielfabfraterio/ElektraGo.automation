@@ -2,6 +2,7 @@ package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.cover.CoverPage;
 import com.elektrago.pages.home.HomeLitePage;
+import com.elektrago.pages.home.HomePage;
 import com.elektrago.pages.login.LoginPage;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
@@ -16,6 +17,7 @@ public class LoginStepDefinitions {
     CoverPage coverPage;
     LoginPage loginPage;
     HomeLitePage homeLitePage;
+    HomePage homePage;
 
     @Given("the app on {string}")
     public void theAppon(String device){
@@ -77,5 +79,11 @@ public class LoginStepDefinitions {
     @Then("the app shows an error message related to username or password")
     public void theAppShowsAnErrorMessageRelatedToEmailOrPassword() {
         Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(),"The element is not present on the screen");
+    }
+
+    @Then("the app shows the wallet home page")
+    public void theAppShowsTheWalletHomePage() {
+        homePage = new HomePage();
+        homePage.validateHomePage();
     }
 }

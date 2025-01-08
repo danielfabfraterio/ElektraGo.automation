@@ -18,6 +18,9 @@ public class HomePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Let's send!\"`]")
     public WebElement btnLetsSend;
 
+    @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
+    public WebElement mapsAtm; 
+
     public HomePage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
@@ -30,6 +33,6 @@ public class HomePage {
     public void tapsOnLetsSend(){
         BaseUtils.waitUntilElementIsClickable(btnLetsSend);
         btnLetsSend.click();
-//        BaseUtils.clickOnElement(btnLetsSend);
+        BaseUtils.clickOnElement(btnLetsSend);
     }
 }
