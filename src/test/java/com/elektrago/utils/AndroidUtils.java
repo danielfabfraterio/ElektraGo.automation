@@ -1,4 +1,4 @@
 package com.elektrago.utils;
 
-public class AndroidUtils extends BaseUtils{
+public class AndroidUtils extends BaseUtils {
 }

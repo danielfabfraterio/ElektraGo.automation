@@ -1,0 +1,10 @@
+{
+    "platforms": [
+        {
+            "name": "iOS"
+        },
+        {
+            "name": "Android"
+        }
+    ]
+}

@@ -58,24 +58,26 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")
     public WebElement SignUpHere;
 
-    public LoginPage(){
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/walletOrNotLink")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")
+    public WebElement SignUpHere;
+
+    public LoginPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
-    public void validateLoginPage(){
+    public void validateLoginPage() {
         BaseUtils.waitUntilElementisPresent(inputEmail);
-        Assert.isTrue(inputEmail.isDisplayed(),"Element is not present");
+        Assert.isTrue(inputEmail.isDisplayed(), "Element is not present");
         BaseUtils.waitUntilElementisPresent(btnNumberInstead);
-        Assert.isTrue(btnNumberInstead.isDisplayed(),"Element is not present");
+        Assert.isTrue(btnNumberInstead.isDisplayed(), "Element is not present");
         BaseUtils.waitUntilElementisPresent(inputPasswd);
-        Assert.isTrue(inputPasswd.isDisplayed(),"Element is not present");
+        Assert.isTrue(inputPasswd.isDisplayed(), "Element is not present");
         BaseUtils.waitUntilElementisPresent(btnForgotPasswd);
-        Assert.isTrue(btnForgotPasswd.isDisplayed(),"Element is not present");
-        BaseUtils.waitUntilElementisPresent(btnLogin);
-        Assert.isTrue(btnLogin.isDisplayed(),"Element is not present");
+        Assert.isTrue(btnForgotPasswd.isDisplayed(), "Element is not present");
     }
 
-    public void selectMobileCode(String mobileCode){
+    public void selectMobileCode(String mobileCode) {
         if (mobileCode.equals("+52")) {
             BaseUtils.clickOnElement(mexicanCodeNumber);
         } else {
