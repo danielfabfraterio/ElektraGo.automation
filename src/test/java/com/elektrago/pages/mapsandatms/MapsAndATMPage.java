@@ -14,24 +14,31 @@ import org.openqa.selenium.WebElement;
 
 public class MapsAndATMPage {
 
+    @AndroidFindBy(id = "com.elektrago:id/search_location")
     @iOSXCUITFindBy(iOSClassChain = "name == \"Search location\"")
     public WebElement inputSearchLocation;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/filter")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Filter:\"]")
     public WebElement btnFilterBy;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/textSpinner")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Filter:\"]/following-sibling::XCUIElementTypeButton")
     public WebElement btnFilterSelected;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/button_qr")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Get barcode\"]")
     public WebElement btnGetBarCode;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/button_my_location")
     @iOSXCUITFindBy(accessibility = "ic my location")
     public WebElement btnICLocation;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/textSpinner")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeCell/XCUIElementTypeOther[1]")
     public WebElement btnBestResult;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/button_refresh")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"Search this area\"]")
     public WebElement btnSearchThisArea;
 
