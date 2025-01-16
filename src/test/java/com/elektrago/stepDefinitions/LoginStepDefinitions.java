@@ -35,17 +35,23 @@ public class LoginStepDefinitions {
     @Then("the Login Page is shows on the app")
     public void theLoginPageIsShowsOnTheApp() {
         loginPage = new LoginPage();
+        loginPage.validateLoginPage();
+        LoginPage.btnDoneKeyboard.click();
     }
 
     @When("the user fill up the email {string}")
     public void theUserFillUpTheEmail(String email) {
         loginPage.inputEmail.clear();
         BaseUtils.fillUpField(loginPage.inputEmail, email);
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
     }
 
     @And("the password {string}")
     public void thePassword(String password) {
         loginPage.inputPasswd.clear();
+        loginPage.inputPasswd.click();
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
         if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
             LoginPage.btnDoneKeyboard.click();
@@ -88,5 +94,14 @@ public class LoginStepDefinitions {
     public void theAppShowsTheWalletHomePage() {
         homePage = new HomePage();
         homePage.validateHomePage();
+        Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(),
+                "The element is not present on the screen");
+    }
+
+    @When("the user logs out")
+    public void theUserLogsOut() {
+        homeLitePage.btnMenu.click();
+        homeLitePage.btnLogout.click();
+        homeLitePage.btnConfirmLogout.click();
     }
 }
