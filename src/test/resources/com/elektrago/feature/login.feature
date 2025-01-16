@@ -1,4 +1,5 @@
-Feat
+Feature: Login
+
 Scenario: Login Sucessfully with Email
 Given the app on "iOS"
 When the user tap on Register or log in

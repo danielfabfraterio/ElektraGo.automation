@@ -7,8 +7,8 @@ import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 public class CoverPage {
 
@@ -23,7 +23,7 @@ public class CoverPage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"img_logo_elektrago_white\"]/following-sibling::XCUIElementTypeStaticText")
     public WebElement txtTitle;
 
-    @AndroidBy(xpath = "com.elektrago.elektrago:id/loginBtn")
+    @AndroidBy(id = "com.elektrago.elektrago:id/loginBtn")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Log in or Sign up\"`]")
     public WebElement btnSignUpLogIn;
 

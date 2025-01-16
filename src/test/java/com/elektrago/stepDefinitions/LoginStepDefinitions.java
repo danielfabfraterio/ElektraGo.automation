@@ -2,18 +2,23 @@ package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.cover.CoverPage;
 import com.elektrago.pages.home.HomeLitePage;
+import com.elektrago.pages.home.HomePage;
 import com.elektrago.pages.login.LoginPage;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class LoginStepDefinitions {
     AppiumDriver driver;
     CoverPage coverPage;
     LoginPage loginPage;
     HomeLitePage homeLitePage;
+    HomePage homePage;
 
     @Given("the app on {string}")
     public void theAppon(String device) {
@@ -38,7 +43,9 @@ public class LoginStepDefinitions {
     public void theUserFillUpTheEmail(String email) {
         loginPage.inputEmail.clear();
         BaseUtils.fillUpField(loginPage.inputEmail, email);
-        LoginPage.btnDoneKeyboard.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
     }
 
     @And("the password {string}")
@@ -46,18 +53,14 @@ public class LoginStepDefinitions {
         loginPage.inputPasswd.clear();
         loginPage.inputPasswd.click();
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
-        LoginPage.btnDoneKeyboard.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
     }
 
     @When("the user tap on the Log in button")
     public void theUserTapOnTheLogInButton() {
         BaseUtils.clickOnElement(loginPage.btnLogin);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        AppiumDriverFactory.quitDriver();
     }
 
     @Then("the app shows the lite home page")
@@ -84,6 +87,13 @@ public class LoginStepDefinitions {
 
     @Then("the app shows an error message related to username or password")
     public void theAppShowsAnErrorMessageRelatedToEmailOrPassword() {
+        Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(), "The element is not present on the screen");
+    }
+
+    @Then("the app shows the wallet home page")
+    public void theAppShowsTheWalletHomePage() {
+        homePage = new HomePage();
+        homePage.validateHomePage();
         Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(),
                 "The element is not present on the screen");
     }
