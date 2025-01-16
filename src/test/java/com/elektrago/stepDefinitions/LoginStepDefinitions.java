@@ -8,9 +8,10 @@ import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.AppiumDriver;
-import io.cucumber.java.en.*;
-
-import java.net.MalformedURLException;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 
 public class LoginStepDefinitions {
     AppiumDriver driver;
@@ -20,40 +21,42 @@ public class LoginStepDefinitions {
     HomePage homePage;
 
     @Given("the app on {string}")
-    public void theAppon(String device){
+    public void theAppon(String device) {
         driver = AppiumDriverFactory.getDriver(device);
         AppiumDriverFactory.setDevice(device);
         coverPage = new CoverPage();
     }
+
     @When("the user tap on Register or log in")
     public void theUserTapOnRegisterOrLogIn() {
         coverPage.tapOnSignupLogin();
     }
+
     @Then("the Login Page is shows on the app")
     public void theLoginPageIsShowsOnTheApp() {
         loginPage = new LoginPage();
     }
+
     @When("the user fill up the email {string}")
     public void theUserFillUpTheEmail(String email) {
         loginPage.inputEmail.clear();
-        BaseUtils.fillUpField(loginPage.inputEmail,email);
+        BaseUtils.fillUpField(loginPage.inputEmail, email);
     }
+
     @And("the password {string}")
     public void thePassword(String password) {
         loginPage.inputPasswd.clear();
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
-        LoginPage.btnDoneKeyboard.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
     }
+
     @When("the user tap on the Log in button")
     public void theUserTapOnTheLogInButton() {
         BaseUtils.clickOnElement(loginPage.btnLogin);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        AppiumDriverFactory.quitDriver();
     }
+
     @Then("the app shows the lite home page")
     public void theAppShowsTheLiteHomePage() {
         homeLitePage = new HomeLitePage();
@@ -78,7 +81,7 @@ public class LoginStepDefinitions {
 
     @Then("the app shows an error message related to username or password")
     public void theAppShowsAnErrorMessageRelatedToEmailOrPassword() {
-        Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(),"The element is not present on the screen");
+        Assert.isTrue(loginPage.msgIncorrectuserNameOrPassENG.isDisplayed(), "The element is not present on the screen");
     }
 
     @Then("the app shows the wallet home page")

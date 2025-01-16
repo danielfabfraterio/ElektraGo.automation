@@ -6,15 +6,15 @@ import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 
 public class MapsAndATMPage {
 
-    @AndroidFindBy(id = "com.elektrago:id/search_location")
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/input_search")
     @iOSXCUITFindBy(iOSClassChain = "name == \"Search location\"")
     public WebElement inputSearchLocation;
 
@@ -43,26 +43,31 @@ public class MapsAndATMPage {
     public WebElement btnSearchThisArea;
 
 
-    public MapsAndATMPage(){
+    public MapsAndATMPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
-    public void validateMapsAndATMs(){
+    public void validateMapsAndATMs() {
         BaseUtils.waitUntilElementisPresent(inputSearchLocation);
         BaseUtils.waitUntilElementisPresent(btnFilterBy);
         BaseUtils.waitUntilElementisPresent(btnGetBarCode);
         BaseUtils.waitUntilElementisPresent(btnICLocation);
     }
 
-    public void verifyFilterSelected(String filterSelected){
+    public void verifyFilterSelected(String filterSelected) {
+        System.out.println(btnFilterSelected.getText().toLowerCase());
         Assert.isTrue(btnFilterSelected.getText().toLowerCase().equals(filterSelected.toLowerCase()), "The elements is not equals each other");
     }
 
-    public void selectFilter(String option){
+    public void selectFilter(String option) {
         if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
-            String customXpath = "//XCUIElementTypeStaticText[@name=\""+option+"\"]";
+            String customXpath = "//XCUIElementTypeStaticText[@name=\"" + option + "\"]";
             WebDriver driver = AppiumDriverFactory.getDriver();
-            driver.findElement(By.xpath(customXpath)).click();;
+            driver.findElement(By.xpath(customXpath)).click();
+        } else if (AppiumDriverFactory.getDevice().equalsIgnoreCase("android")) {
+            String customXpath = "//android.widget.CheckedTextView[@resource-id=\"android:id/text1\" and @text=\"" + option + "\"]";
+            WebDriver driver = AppiumDriverFactory.getDriver();
+            driver.findElement(By.xpath(customXpath)).click();
         }
     }
 

@@ -3,25 +3,28 @@ package com.elektrago.pages.home;
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 import dev.failsafe.internal.util.Assert;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.PageFactory;
 
 
 public class HomePage {
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/send_container")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"$0.00\"`]")
     public WebElement inputSendAmount;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/button_continue")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Let's send!\"`]")
     public WebElement btnLetsSend;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/action_map")
     @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
-    public WebElement mapsAtm; 
+    public WebElement mapsAtm;
 
-    public HomePage(){
+    public HomePage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
@@ -30,7 +33,7 @@ public class HomePage {
         Assert.isTrue(inputSendAmount.isDisplayed(), "Element is not present");
     }
 
-    public void tapsOnLetsSend(){
+    public void tapsOnLetsSend() {
         BaseUtils.waitUntilElementIsClickable(btnLetsSend);
         btnLetsSend.click();
         BaseUtils.clickOnElement(btnLetsSend);

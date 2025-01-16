@@ -2,7 +2,7 @@ Feature: Maps & ATM's
 
   Background:
     Given the app on "Android"
-    When the user tap on Register or log in
+    ## When the user tap on Register or log in
     Then the Login Page is shows on the app
     And the user tap the link to use mobile number
     When the user select the mobile code "+1"
@@ -40,7 +40,7 @@ Feature: Maps & ATM's
     Then Map is displayed with new location
     When Tap on Filter "Show all"
     And Select "Add money with your card"
-    Then Map is displayed with the selected filter "Add money with your card"
+    Then Map is displayed with the selected filter "Add money with card"
 
   Scenario: Filter map with Withdraw Money
     Given Cost Calculator is displayed
@@ -51,7 +51,7 @@ Feature: Maps & ATM's
     Then Map is displayed with new location
     When Tap on Filter "Show all"
     And Select "Withdraw money (ATM)"
-    Then Map is displayed with the selected filter "Withdraw money (ATM)"
+    Then Map is displayed with the selected filter "Withdraw (ATM)"
 
   Scenario: Generate barcode with 7 Eleven
     Given Cost Calculator is displayed
@@ -98,7 +98,7 @@ Feature: Maps & ATM's
     When Select Create Code button
     Then Barcode screen is displayed
 
-  Scenario: Generate barcode with Walgreens
+  Scenario: Generate barcode with Walmart
     Given Cost Calculator is displayed
     When Select Maps and ATMs
     Then Map with location is displayed
