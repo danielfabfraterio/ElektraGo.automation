@@ -1,13 +1,14 @@
 package com.elektrago.pages.deliverymethod;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
+
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class DeliveryMethodPage {
 
@@ -19,6 +20,9 @@ public class DeliveryMethodPage {
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Direct to App\"`]")
     public WebElement btnDirectToApp;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Home delivery\"`]")
+    public WebElement btnHomeDelivery;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"arrow down icon\"`][1]")
     public WebElement btnRecipientsState;

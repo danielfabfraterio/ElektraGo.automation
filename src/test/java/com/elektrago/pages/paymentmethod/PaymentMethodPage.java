@@ -18,6 +18,9 @@ public class PaymentMethodPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[2]")
     public WebElement firstCardAvailable;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[1]")
+    public WebElement firstCardAvailableLite;
+
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"New Card\"`]")
     public WebElement btnNewCard;
 

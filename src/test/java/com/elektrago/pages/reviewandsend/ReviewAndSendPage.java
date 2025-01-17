@@ -27,6 +27,9 @@ public class ReviewAndSendPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Send Now\"`]")
     public WebElement btnSendNow;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Continue\"`]")
+    public WebElement btnContinue;
+
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Got it\"`]")
     public WebElement btnGotIt;
 
@@ -58,5 +61,9 @@ public class ReviewAndSendPage {
 
     public void tapsOnSendNowButton() {
         btnSendNow.click();
+    }
+
+    public void tapsOnContinueButton() {
+        btnContinue.click();
     }
 }

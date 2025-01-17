@@ -1,8 +1,7 @@
 package com.elektrago.stepDefinitions;
 
-import static com.elektrago.utils.AppiumDriverFactory.getDriver;
-
 import com.elektrago.pages.deliverymethod.DeliveryMethodPage;
+import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 import com.elektrago.utils.BaseUtils;
 
 import io.appium.java_client.AppiumDriver;
@@ -36,6 +35,14 @@ public class DeliverymethodStepDefinitions {
         deliveryMethodPage = new DeliveryMethodPage();
         deliveryMethodPage.validateDeliveryMethodPage();
         deliveryMethodPage.btnDirectToApp.click();
+    }
+
+    @Given("the user taps on Home Delivery")
+    public void theUserTapsOnHomeDelivery() {
+        driver = getDriver("iOS");
+        deliveryMethodPage = new DeliveryMethodPage();
+        deliveryMethodPage.validateDeliveryMethodPage();
+        deliveryMethodPage.btnHomeDelivery.click();
     }
 
     @When("the user taps on Recipient's state")

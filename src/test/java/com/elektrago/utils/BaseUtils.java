@@ -25,7 +25,6 @@ public class BaseUtils {
     public static void fillUpField(WebElement element, String value) {
         AppiumDriverFactory.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         element.sendKeys(value);
-        hideKeyboard();
     }
 
     public static void hideKeyboard() {

@@ -12,13 +12,16 @@ import org.openqa.selenium.support.PageFactory;
 public class HomePage {
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/send_container")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"$0.00\"`]")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther/following-sibling::XCUIElementTypeTextField")
     public WebElement inputSendAmount;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/button_continue")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Let's send!\"`]")
     public WebElement btnLetsSend;
-  
+
+    @iOSXCUITFindBy(accessibility = "Done")
+    public WebElement btnDoneKeyboard;
+
     @AndroidFindBy(id = "com.elektrago.elektrago:id/action_map")
     @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
     public WebElement mapsAtm;

@@ -26,7 +26,10 @@ public class RemittanceStepDefinitions {
     @Given("the user fills up the amount to make the remittance for {string}")
     public void theUserFillsUpTheAmountToMakeTheRemittance(String amount) {
         BaseUtils.waitUntilElementisPresent(homePage.inputSendAmount);
+        homePage.inputSendAmount.clear();
         BaseUtils.fillUpField(homePage.inputSendAmount, amount);
+        BaseUtils.waitUntilElementIsClickable(homePage.btnDoneKeyboard);
+        BaseUtils.clickOnElement(homePage.btnDoneKeyboard);
     }
 
     @Then("the user taps on Let's Send")
