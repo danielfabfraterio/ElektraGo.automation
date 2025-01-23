@@ -61,7 +61,9 @@ public class ReviewAndSendPage {
             inputPromoCodeGT.click();
             inputPromoCodeGT.sendKeys(promoCode);
         }
-        btnEnter.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            btnEnter.click();
+        }
     }
 
     public void tapsOnSendNowButton() {
