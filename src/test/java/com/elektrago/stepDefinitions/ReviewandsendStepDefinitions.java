@@ -4,6 +4,7 @@ import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
 import com.elektrago.pages.reviewandsend.ReviewAndSendPage;
 
+import com.elektrago.utils.BaseUtils;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -26,13 +27,20 @@ public class ReviewandsendStepDefinitions {
         reviewAndSendPage.tapsOnSendNowButton();
     }
 
+    @Given("the user taps on Continue button")
+    public void theUserTapsOnContinueButton() {
+        reviewAndSendPage.tapsOnContinueButton();
+    }
+
     @Then("the user taps on Got it button")
     public void theUserTapsOnGotIt() {
+        BaseUtils.waitUntilElementIsClickable(reviewAndSendPage.btnGotIt);
         reviewAndSendPage.btnGotIt.click();
     }
 
     @Then("the user taps on Cancel button")
     public void theUserTapsOnCancel() {
+        BaseUtils.waitUntilElementIsClickable(reviewAndSendPage.btnCancel);
         reviewAndSendPage.btnCancel.click();
     }
 }

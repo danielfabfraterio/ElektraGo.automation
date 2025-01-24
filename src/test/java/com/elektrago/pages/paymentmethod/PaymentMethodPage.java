@@ -7,6 +7,7 @@ import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 
 import dev.failsafe.internal.util.Assert;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
@@ -18,6 +19,11 @@ public class PaymentMethodPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[2]")
     public WebElement firstCardAvailable;
 
+    @AndroidFindBy(uiAutomator="new UiSelector().className(\"android.view.ViewGroup\").instance(7)")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell[1]")
+    public WebElement firstCardAvailableLite;
+
+    @AndroidFindBy(uiAutomator="new UiSelector().className(\"android.view.ViewGroup\").instance(9)")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"New Card\"`]")
     public WebElement btnNewCard;
 

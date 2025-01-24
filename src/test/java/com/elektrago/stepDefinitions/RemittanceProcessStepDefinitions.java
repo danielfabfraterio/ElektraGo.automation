@@ -3,6 +3,7 @@ package com.elektrago.stepDefinitions;
 import java.io.File;
 import java.io.IOException;
 
+import com.elektrago.utils.BaseUtils;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
@@ -79,9 +80,67 @@ public class RemittanceProcessStepDefinitions {
         loginStepDefinitions.theUserLogsOut();
     }
 
+    @Then("run Remittance Lite tests")
+    public void runRemittanceLitetests() {
+        String platform = platformsData.get("platforms").get(0).get("name").asText();
+
+        for (JsonNode remittanceData : remittancesData.get("remittances").get(1).get("cases")) {
+            String country = remittanceData.get("country").asText();
+            String amount = remittanceData.get("amount").asText();
+            String deliveryMethod = remittanceData.get("deliveryMethod").asText();
+            String state = remittanceData.get("state").asText();
+            String institution = remittanceData.get("institution").asText();
+            Boolean isAdditionalFieldRequired = remittanceData.get("isAdditionalFieldRequired").asBoolean();
+            Boolean isPayerBranchRequired = remittanceData.get("isPayerBranchRequired").asBoolean();
+            String paymentMethod = remittanceData.get("paymentMethod").asText();
+            String accountNumber = remittanceData.get("accountNumber").asText();
+            String senderIdNumber = remittanceData.get("senderIdNumber").asText();
+            String promoCode = remittanceData.get("promoCode").asText();
+
+            remittanceSetup(platform, country, amount);
+
+            choosearecipient();
+
+            confirmRecipient();
+
+            if (deliveryMethod.equals("Cash Pickup")) {
+                deliveryMethodCashPickup(state, institution);
+            }
+
+            if (deliveryMethod.equals("Account Credit")) {
+                deliveryMethodAccountCredit(state, institution, accountNumber, senderIdNumber);
+            }
+            if (deliveryMethod.equals("Direct to App")) {
+                deliveryMethodDirectToApp(state, institution);
+                break;
+            }
+            if (deliveryMethod.equals("Home Delivery")) {
+                deliveryMethodHomeDelivery(state, institution);
+                break;
+            }
+
+            if (isPayerBranchRequired) {
+                payerBranch();
+            }
+
+            paymentMethodStepsLite(paymentMethod);
+
+            reviewAndSendLite(country, promoCode);
+        }
+
+        loginStepDefinitions.theUserLogsOut();
+    }
+
     private void reviewAndSend(String country, String promoCode) {
         reviewandsendStepDefinitions.theUserFillsPromoCode(country, promoCode);
         reviewandsendStepDefinitions.theUserTapsOnSendNowButton();
+        reviewandsendStepDefinitions.theUserTapsOnGotIt();
+        reviewandsendStepDefinitions.theUserTapsOnCancel();
+    }
+
+    private void reviewAndSendLite(String country, String promoCode) {
+        reviewandsendStepDefinitions.theUserFillsPromoCode(country, promoCode);
+        reviewandsendStepDefinitions.theUserTapsOnContinueButton();
         reviewandsendStepDefinitions.theUserTapsOnGotIt();
         reviewandsendStepDefinitions.theUserTapsOnCancel();
     }
@@ -107,6 +166,16 @@ public class RemittanceProcessStepDefinitions {
 
         if (paymentMethod.equals("Apple Pay")) {
             paymentmethodStepDefinitions.theUserTapsOnApplePayButton();
+        }
+    }
+
+    private void paymentMethodStepsLite(String paymentMethod) {
+        if (paymentMethod.equals("Saved Card")) {
+            paymentmethodStepDefinitions.theUserTapsOnTheFirstCardAvailableLite();
+        }
+
+        if (paymentMethod.equals("New Card")) {
+            paymentmethodStepDefinitions.theUserTapsOnNewCardButton();
         }
     }
 
@@ -145,6 +214,13 @@ public class RemittanceProcessStepDefinitions {
 
         deliveryMethod(state, institution);
     }
+
+    private void deliveryMethodHomeDelivery(String state, String institution) {
+        deliverymethodStepDefinitions.theUserTapsOnHomeDelivery();
+
+        deliveryMethod(state, institution);
+    }
+
 
     private void deliveryMethodCashPickup(String state, String institution) {
         deliverymethodStepDefinitions.theUserTapsOnCashPickup();

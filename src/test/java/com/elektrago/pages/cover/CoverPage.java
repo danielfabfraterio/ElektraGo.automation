@@ -23,7 +23,7 @@ public class CoverPage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"img_logo_elektrago_white\"]/following-sibling::XCUIElementTypeStaticText")
     public WebElement txtTitle;
 
-    @AndroidBy(id = "com.elektrago.elektrago:id/loginBtn")
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/loginBtn")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Log in or Sign up\"`]")
     public WebElement btnSignUpLogIn;
 
@@ -49,6 +49,7 @@ public class CoverPage {
     }
 
     public void tapOnSignupLogin() {
+        BaseUtils.waitUntilElementIsClickable(btnSignUpLogIn);
         btnSignUpLogIn.click();
     }
 }

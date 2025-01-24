@@ -2,6 +2,8 @@ package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.home.HomePage;
 
+import com.elektrago.pages.login.LoginPage;
+import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Given;
@@ -26,7 +28,12 @@ public class RemittanceStepDefinitions {
     @Given("the user fills up the amount to make the remittance for {string}")
     public void theUserFillsUpTheAmountToMakeTheRemittance(String amount) {
         BaseUtils.waitUntilElementisPresent(homePage.inputSendAmount);
+        homePage.inputSendAmount.clear();
         BaseUtils.fillUpField(homePage.inputSendAmount, amount);
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            BaseUtils.waitUntilElementIsClickable(homePage.btnDoneKeyboard);
+            BaseUtils.clickOnElement(homePage.btnDoneKeyboard);
+        }
     }
 
     @Then("the user taps on Let's Send")
