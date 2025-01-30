@@ -41,6 +41,7 @@ public class HomePage {
     public WebElement btnFilteredCountry;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/button_profile")
+    @iOSXCUITFindBy(accessibility = "img_avatar_gray")
     public  WebElement btnProfileImage;
 
     public HomePage() {

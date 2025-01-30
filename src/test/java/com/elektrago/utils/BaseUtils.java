@@ -1,17 +1,14 @@
 package com.elektrago.utils;
 
-import org.openqa.selenium.Point;
+import java.time.Duration;
+import java.util.Collections;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.List;
 
 import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
@@ -50,13 +47,44 @@ public class BaseUtils {
         explicitWait.until(ExpectedConditions.elementToBeSelected(element));
     }
 
-    public static void scrollToElement(WebElement element) {
-        Actions actions = new Actions(getDriver());
-        while (!element.isDisplayed()) {
-            actions.scrollByAmount(0, 200) // Scroll down
-                    .pause(Duration.ofMillis(500))
-                    .perform();
+    // Método para hacer scroll hasta que el elemento sea visible
+    public static void scrollUntilElementIsPresent(WebElement element) {
+        final int MAX_ATTEMPTS = 5;
+        
+        for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+            try {
+                waitUntilElementisPresent(element);
+                return;
+            } catch (Exception e) {
+                performVerticalScroll();
+            }
         }
+        throw new RuntimeException("Elemento no encontrado después de " + MAX_ATTEMPTS + " intentos de scroll");
+    }
+
+    // Método para realizar scroll vertical
+    private static void performVerticalScroll() {
+        Dimension size = getDriver().manage().window().getSize();
+        
+        int startX = size.getWidth() / 2;
+        int startY = (int) (size.getHeight() * 0.8);
+        int endY = (int) (size.getHeight() * 0.2);
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence scroll = new Sequence(finger, 0);
+        
+        scroll.addAction(finger.createPointerMove(Duration.ZERO, 
+                        PointerInput.Origin.viewport(), 
+                        startX, 
+                        startY));
+        scroll.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        scroll.addAction(finger.createPointerMove(Duration.ofMillis(600),
+                        PointerInput.Origin.viewport(), 
+                        startX, 
+                        endY));
+        scroll.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        getDriver().perform(Collections.singletonList(scroll));
     }
 
 }
