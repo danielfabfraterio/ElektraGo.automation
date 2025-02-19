@@ -1,13 +1,15 @@
 package com.elektrago.pages.login;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
+
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage {
 
@@ -53,10 +55,6 @@ public class LoginPage {
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`][1]")
     public static WebElement btnDoneKeyboard;
-
-    @AndroidFindBy(id = "com.elektrago.elektrago:id/walletOrNotLink")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")
-    public WebElement SignUpHere;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/walletOrNotLink")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")

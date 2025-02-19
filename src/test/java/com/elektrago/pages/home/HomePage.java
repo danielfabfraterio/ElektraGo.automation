@@ -1,13 +1,15 @@
 package com.elektrago.pages.home;
 
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
 import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
+
 import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
@@ -22,6 +24,10 @@ public class HomePage {
     @AndroidFindBy(id = "com.elektrago.elektrago:id/action_map")
     @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
     public WebElement mapsAtm;
+
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/action_send")
+    @iOSXCUITFindBy(accessibility = "")
+    public WebElement sendMoney;
   
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTextField")
     public WebElement btnSelectCountry;

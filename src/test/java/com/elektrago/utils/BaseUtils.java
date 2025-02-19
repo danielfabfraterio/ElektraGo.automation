@@ -1,15 +1,16 @@
 package com.elektrago.utils;
 
-import org.openqa.selenium.Point;
+import java.time.Duration;
+import java.util.Collections;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.util.List;
+import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
 public class BaseUtils {
     protected static WebDriverWait explicitWait;
@@ -17,28 +18,14 @@ public class BaseUtils {
 
     public static void waitUntilElementisPresent(WebElement element) {
         if (explicitWait == null) {
-            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void fillUpField(WebElement element, String value) {
-        AppiumDriverFactory.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         element.sendKeys(value);
-        hideKeyboard();
-    }
-
-    public static void hideKeyboard() {
-        final PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
-        Point tapPoint = new Point(347, 488);
-        Sequence tap = new Sequence(finger, 1);
-        tap.addAction(finger.createPointerMove(Duration.ofMillis(0),
-                PointerInput.Origin.viewport(), tapPoint.x, tapPoint.y));
-        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
-        tap.addAction(new Pause(finger, Duration.ofMillis(50)));
-        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        AppiumDriverFactory.getDriver().perform(List.of(tap));
-
     }
 
     public static void clickOnElement(WebElement element) {
@@ -48,17 +35,56 @@ public class BaseUtils {
 
     public static void waitUntilElementIsClickable(WebElement element) {
         if (explicitWait == null) {
-            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitUntilElementIsSelected(WebElement element) {
         if (explicitWait == null) {
-            explicitWait = new WebDriverWait(AppiumDriverFactory.getDriver(), Duration.ofSeconds(SECONDS));
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.elementToBeSelected(element));
     }
 
+    // Método para hacer scroll hasta que el elemento sea visible
+    public static void scrollUntilElementIsPresent(WebElement element) {
+        final int MAX_ATTEMPTS = 5;
+        
+        for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
+            try {
+                waitUntilElementisPresent(element);
+                return;
+            } catch (Exception e) {
+                performVerticalScroll();
+            }
+        }
+        throw new RuntimeException("Elemento no encontrado después de " + MAX_ATTEMPTS + " intentos de scroll");
+    }
+
+    // Método para realizar scroll vertical
+    private static void performVerticalScroll() {
+        Dimension size = getDriver().manage().window().getSize();
+        
+        int startX = size.getWidth() / 2;
+        int startY = (int) (size.getHeight() * 0.8);
+        int endY = (int) (size.getHeight() * 0.2);
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence scroll = new Sequence(finger, 0);
+        
+        scroll.addAction(finger.createPointerMove(Duration.ZERO, 
+                        PointerInput.Origin.viewport(), 
+                        startX, 
+                        startY));
+        scroll.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        scroll.addAction(finger.createPointerMove(Duration.ofMillis(600),
+                        PointerInput.Origin.viewport(), 
+                        startX, 
+                        endY));
+        scroll.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        getDriver().perform(Collections.singletonList(scroll));
+    }
 
 }
