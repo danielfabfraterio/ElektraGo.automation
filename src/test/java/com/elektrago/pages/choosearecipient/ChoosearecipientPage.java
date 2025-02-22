@@ -69,10 +69,18 @@ public class ChoosearecipientPage {
      * @param beneficiaryName El nombre (o parte) del beneficiario a buscar.
      * @return WebElement correspondiente al beneficiario.
      */
-    public WebElement scrollToBeneficiary(String beneficiaryName) {
-        return AppiumDriverFactory.getDriver().findElement(By.xpath(
-            "//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewName' and contains(@text, '" + beneficiaryName + "')]"
-        ));
+    public void scrollToBeneficiary(String beneficiaryName) {
+        String xpath = "//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewName' and contains(@text, '" + beneficiaryName + "')]";
+        WebElement element;
+        boolean elementFound = false;
+        while (!elementFound) {
+            try {
+                element = AppiumDriverFactory.getDriver().findElement(By.xpath(xpath));
+                BaseUtils.scrollUntilElementIsPresent(element);
+            } catch (Exception e) {
+                System.err.println("Error al encontrar elemento:"+e.toString());
+             }
+        }
     }
 
     /**
@@ -90,7 +98,7 @@ public class ChoosearecipientPage {
             "[.//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewName' and contains(@text, '" + beneficiaryName + "')]]" +
             "//android.widget.Button[@resource-id='com.elektrago.elektrago:id/button_invite']"
         ));
-        inviteButton.click();
+        BaseUtils.clickOnElement(inviteButton);
     }
 
     /**
@@ -108,7 +116,7 @@ public class ChoosearecipientPage {
             "[.//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewName' and contains(@text, '" + beneficiaryName + "')]]" +
             "//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewEdit']"
         ));
-        editButton.click();
+        BaseUtils.clickOnElement(editButton);
     }
 
     /**
@@ -122,6 +130,6 @@ public class ChoosearecipientPage {
                        "[.//android.widget.TextView[@resource-id='com.elektrago.elektrago:id/textViewName' and contains(@text, '" 
                        + beneficiaryName + "')]]";
         WebElement beneficiaryElement = AppiumDriverFactory.getDriver().findElement(By.xpath(xpath));
-        beneficiaryElement.click();
+        BaseUtils.clickOnElement(beneficiaryElement);
     }
 }
