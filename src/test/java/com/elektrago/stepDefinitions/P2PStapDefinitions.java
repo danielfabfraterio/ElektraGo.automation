@@ -149,4 +149,9 @@ public class P2PStapDefinitions {
         gifSelectionPage = new GifSelectionPage();
         gifSelectionPage.selectRandomGif();
     }
+
+    @When("the user clicks on Cancel button")
+    public void theUserClicksOnCancelButton() {
+        BaseUtils.clickOnElement(p2pPage.cancelButton);
+    }
 }
