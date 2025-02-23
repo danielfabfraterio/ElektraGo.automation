@@ -19,12 +19,15 @@ public class ChoosearecipientPage {
     public WebElement firstRecipientAvailable;
 
     @AndroidFindBy(id="com.elektrago.elektrago:id/buttonAddContact")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Agregar beneficiario\"`]")
     public WebElement addContactButton;
 
     @AndroidFindBy(id="com.elektrago.elektrago:id/searchViewText")
+    @iOSXCUITFindBy(accessibility = "Buscar beneficiario")
     public WebElement seachBeneficiary;
 
     @AndroidFindBy(id="com.elektrago.elektrago:id/contact_data")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Daniel  Lopez \"`]")
     public WebElement resultBeneficiarySearch;
 
     @AndroidFindBy(id="com.elektrago.elektrago:id/name")
@@ -43,9 +46,11 @@ public class ChoosearecipientPage {
     public WebElement secondLastNameField;
 
     @AndroidFindBy(id="com.elektrago.elektrago:id/button_add")
+    @iOSXCUITFindBy(accessibility = "Agregar")
     public WebElement addButton;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/buttonImportContact")
+    @iOSXCUITFindBy(accessibility = "Importar contacto")
     public WebElement importContactButton;
 
     
