@@ -7,14 +7,17 @@ import com.elektrago.utils.AppiumDriverFactory;
 import com.elektrago.utils.BaseUtils;
 
 import dev.failsafe.internal.util.Assert;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class ReviewAndSendPage {
 
+    @AndroidFindBy(id="com.elektrago.elektrago:id/viewPromocode")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeImage[`name == \"ic_chevron_down\"`][1]")
     public WebElement btnPromoCode;
 
+    @AndroidFindBy(id="com.elektrago.elektrago:id/input_promo_code")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther[5]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTextField")
     public WebElement inputPromoCodeMX;
 
@@ -24,8 +27,13 @@ public class ReviewAndSendPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`]")
     public WebElement btnEnter;
 
+    @AndroidFindBy(id="com.elektrago.elektrago:id/button_continue")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Send Now\"`]")
     public WebElement btnSendNow;
+
+    @AndroidFindBy(id="com.elektrago.elektrago:id/button_continue")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Continue\"`]")
+    public WebElement btnContinue;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Got it\"`]")
     public WebElement btnGotIt;
@@ -53,10 +61,16 @@ public class ReviewAndSendPage {
             inputPromoCodeGT.click();
             inputPromoCodeGT.sendKeys(promoCode);
         }
-        btnEnter.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            btnEnter.click();
+        }
     }
 
     public void tapsOnSendNowButton() {
         btnSendNow.click();
+    }
+
+    public void tapsOnContinueButton() {
+        btnContinue.click();
     }
 }

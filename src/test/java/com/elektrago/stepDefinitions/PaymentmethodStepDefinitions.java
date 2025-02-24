@@ -30,6 +30,15 @@ public class PaymentmethodStepDefinitions {
         ;
     }
 
+    @Given("the user taps on the first card available on Lite Account")
+    public void theUserTapsOnTheFirstCardAvailableLite() {
+        driver = getDriver("iOS");
+        paymentMethodPage = new PaymentMethodPage();
+        BaseUtils.waitUntilElementIsClickable(paymentMethodPage.firstCardAvailableLite);
+        paymentMethodPage.firstCardAvailableLite.click();
+        ;
+    }
+
     @Given("the user taps on new card button")
     public void theUserTapsOnNewCardButton() {
         driver = getDriver("iOS");

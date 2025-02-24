@@ -36,7 +36,9 @@ public class LoginStepDefinitions {
     public void theLoginPageIsShowsOnTheApp() {
         loginPage = new LoginPage();
         loginPage.validateLoginPage();
-        LoginPage.btnDoneKeyboard.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
     }
 
     @When("the user fill up the email {string}")
@@ -55,6 +57,8 @@ public class LoginStepDefinitions {
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
         if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
             LoginPage.btnDoneKeyboard.click();
+        }else{
+            driver.executeScript("mobile: hideKeyboard");
         }
     }
 

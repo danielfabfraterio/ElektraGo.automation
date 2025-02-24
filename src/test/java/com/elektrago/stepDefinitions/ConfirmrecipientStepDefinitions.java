@@ -1,6 +1,7 @@
 package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.confirmrecipient.ConfirmrecipientPage;
+import com.elektrago.utils.AppiumDriverFactory;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Given;
 
@@ -12,8 +13,10 @@ public class ConfirmrecipientStepDefinitions {
 
     @Given("the user taps on confirm button")
     public void theUserTapsOnConfirmButton() {
-        driver = getDriver("iOS");
-        confirmrecipientPage = new ConfirmrecipientPage();
-        confirmrecipientPage.tapsOnConfirmButton();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+            driver = getDriver("iOS");
+            confirmrecipientPage = new ConfirmrecipientPage();
+            confirmrecipientPage.tapsOnConfirmButton();
+        }
     }
 }

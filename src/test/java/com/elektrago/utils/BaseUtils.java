@@ -19,11 +19,13 @@ public class BaseUtils {
     public static void waitUntilElementisPresent(WebElement element) {
         if (explicitWait == null) {
             explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void fillUpField(WebElement element, String value) {
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         element.sendKeys(value);
     }
@@ -36,12 +38,14 @@ public class BaseUtils {
     public static void waitUntilElementIsClickable(WebElement element) {
         if (explicitWait == null) {
             explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitUntilElementIsSelected(WebElement element) {
         if (explicitWait == null) {
+            explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
             explicitWait = new WebDriverWait(getDriver(), Duration.ofSeconds(SECONDS));
         }
         explicitWait.until(ExpectedConditions.elementToBeSelected(element));
