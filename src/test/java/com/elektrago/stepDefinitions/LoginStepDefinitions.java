@@ -45,18 +45,23 @@ public class LoginStepDefinitions {
     public void theUserFillUpTheEmail(String email) {
         loginPage.inputEmail.clear();
         BaseUtils.fillUpField(loginPage.inputEmail, email);
-        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
             LoginPage.btnDoneKeyboard.click();
         }
+        loginPage.tapsOnContinue();
     }
 
     @And("the password {string}")
     public void thePassword(String password) {
+        try{
+            LoginPage.btnDoneKeyboard.click();
+        }
+        catch (Exception ignored){ }
         loginPage.inputPasswd.clear();
         loginPage.inputPasswd.click();
         BaseUtils.fillUpField(loginPage.inputPasswd, password);
-        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
-            LoginPage.btnDoneKeyboard.click();
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
+            loginPage.btnDoneKeyboard.click();
         }else{
             driver.executeScript("mobile: hideKeyboard");
         }
@@ -75,7 +80,7 @@ public class LoginStepDefinitions {
 
     @And("the user tap the link to use mobile number")
     public void theUserTapTheLinkToUseMobileNumber() {
-        BaseUtils.clickOnElement(loginPage.btnNumberInstead);
+        BaseUtils.clickOnElement(loginPage.btnUseMobileNumberInstead);
     }
 
     @And("the user fill up the mobile field with {string}")

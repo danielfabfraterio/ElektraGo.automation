@@ -44,7 +44,7 @@ public class PaymentmethodStepDefinitions {
         driver = getDriver("iOS");
         paymentMethodPage = new PaymentMethodPage();
         paymentMethodPage.validatePaymentMethodPage();
-        paymentMethodPage.btnNewCard.click();
+        paymentMethodPage.tapsOnAddNewCard();
     }
 
     @Given("the user taps on Apple Pay button")

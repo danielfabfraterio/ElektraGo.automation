@@ -40,6 +40,15 @@ public class HomePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeTable/XCUIElementTypeCell")
     public WebElement btnFilteredCountry;
 
+    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")
+    public WebElement textFirstName;
+
+    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeStaticText[`name == \"Currency exchange rate\"`]")
+    public WebElement textCurrencyExchangeRate;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Later\"`]")
+    private WebElement btnLater;
+
     public HomePage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
@@ -52,5 +61,15 @@ public class HomePage {
     public void tapsOnLetsSend() {
         BaseUtils.waitUntilElementIsClickable(btnLetsSend);
         BaseUtils.clickOnElement(btnLetsSend);
+    }
+
+    public void validateFirstName() {
+        try {
+            BaseUtils.clickOnElement(btnLater);
+        } catch(Exception ignored) {
+
+        }
+        BaseUtils.waitUntilElementisPresent(textFirstName);
+        Assert.isTrue(textFirstName.isDisplayed(), "Element is not present");
     }
 }

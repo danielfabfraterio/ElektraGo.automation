@@ -20,6 +20,7 @@ public class ReviewandsendStepDefinitions {
         reviewAndSendPage.validateReviewAndSendPage();
         reviewAndSendPage.btnPromoCode.click();
         reviewAndSendPage.fillPromoCode(country, promoCode);
+//        reviewAndSendPage.btnEnter.click();
     }
 
     @Given("the user taps on send now button")

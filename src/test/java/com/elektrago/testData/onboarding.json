@@ -1,0 +1,27 @@
+{
+  "cases": [
+    "success",
+    "usedEmail",
+    "usedPhoneNumber"
+  ],
+  "registerData": {
+    "login": {
+      "email": "a+2503051225@fraternitas.io",
+      "phoneNumber": "2503051225",
+      "otp": "000000"
+    },
+    "birthdate": {
+      "day": "24",
+      "month": "June",
+      "year": "2000"
+    },
+    "address": {
+      "streetAndNumber": "123 Fake Street",
+      "buildOrDept": "A"
+    },
+    "passwords": {
+      "password": "Test2025!",
+      "passwordConfirm": "Test2025!"
+    }
+  }
+}

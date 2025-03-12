@@ -1,6 +1,8 @@
 package com.elektrago.pages.onboarding;
 
 import com.elektrago.utils.AppiumDriverFactory;
+import com.elektrago.utils.BaseUtils;
+import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -36,5 +38,10 @@ public class AddressInformationPage {
 
     public AddressInformationPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()),this);
+    }
+
+    public void validate() {
+        BaseUtils.waitUntilElementisPresent(inputStreetAddress);
+        Assert.isTrue(inputStreetAddress.isDisplayed(), "Element is not present");
     }
 }

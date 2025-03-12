@@ -1,6 +1,8 @@
 package com.elektrago.pages.signup;
 
 import com.elektrago.utils.AppiumDriverFactory;
+import com.elektrago.utils.BaseUtils;
+import dev.failsafe.internal.util.Assert;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -12,7 +14,7 @@ public class SignUpPage {
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_email")
     @iOSXCUITFindBy(accessibility = "Registration")
-    private WebElement inputEmail;
+    public WebElement inputEmail;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/relativeLayout")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"+1\"`]")
@@ -20,15 +22,15 @@ public class SignUpPage {
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_phone")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`value == \"123 456 7890\"`]")
-    private WebElement inputMobileNumber;
+    public WebElement inputMobileNumber;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/accept_terms_text_view")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"uniteller_powered_logo\"]/preceding-sibling::XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeButton")
     private WebElement linkLegalDocuments;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/button_continue")
-    @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"uniteller_powered_logo\"]/following-sibling::XCUIElementTypeButton")
-    private WebElement btnContinue;
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Continue\"]")
+    public WebElement btnContinue;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/sign_in_text")
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"uniteller_powered_logo\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton")
@@ -36,5 +38,14 @@ public class SignUpPage {
 
     public SignUpPage(){
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
+    }
+
+    public void validateSignupPage() {
+        BaseUtils.waitUntilElementisPresent(inputEmail);
+        Assert.isTrue(inputEmail.isDisplayed(), "Element is not present");
+    }
+
+    public void tapsOnContinue() {
+        btnContinue.click();
     }
 }

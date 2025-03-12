@@ -1,17 +1,12 @@
 package com.elektrago.utils;
 
-import org.openqa.selenium.Point;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Pause;
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
 import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
@@ -59,4 +54,14 @@ public class BaseUtils {
         }
     }
 
+    public static void swipeToSelectDate(WebElement element, String day, String month, String year) {
+        WebElement yearPicker = element.findElements(By.xpath("//XCUIElementTypePickerWheel")).get(2);
+        yearPicker.sendKeys(year);
+
+        WebElement monthPicker = element.findElements(By.xpath("//XCUIElementTypePickerWheel")).get(1);
+        monthPicker.sendKeys(month);
+
+        WebElement dayPicker = element.findElements(By.xpath("//XCUIElementTypePickerWheel")).get(0);
+        dayPicker.sendKeys(day);
+    }
 }

@@ -12,17 +12,19 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class LoginPage {
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Done\"`]")
+    public WebElement btnEnter;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_email")
-    @iOSXCUITFindBy(accessibility = "usernameTextfield")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"usernameTextfield\"`]")
     public WebElement inputEmail;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/switch_option_text")
     @iOSXCUITFindBy(accessibility = "Use mobile number instead")
-    public WebElement btnNumberInstead;
+    public WebElement btnUseMobileNumberInstead;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_password")
-    @iOSXCUITFindBy(className = "XCUIElementTypeSecureTextField")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeSecureTextField")
     public WebElement inputPasswd;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/text_forgot_password")
@@ -60,6 +62,9 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Sign up here\"`]")
     public WebElement SignUpHere;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Continue\"`]")
+    public WebElement btnContinue;
+
     public LoginPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
@@ -67,12 +72,8 @@ public class LoginPage {
     public void validateLoginPage() {
         BaseUtils.waitUntilElementisPresent(inputEmail);
         Assert.isTrue(inputEmail.isDisplayed(), "Element is not present");
-        BaseUtils.waitUntilElementisPresent(btnNumberInstead);
-        Assert.isTrue(btnNumberInstead.isDisplayed(), "Element is not present");
-        BaseUtils.waitUntilElementisPresent(inputPasswd);
-        Assert.isTrue(inputPasswd.isDisplayed(), "Element is not present");
-        BaseUtils.waitUntilElementisPresent(btnForgotPasswd);
-        Assert.isTrue(btnForgotPasswd.isDisplayed(), "Element is not present");
+        BaseUtils.waitUntilElementisPresent(btnUseMobileNumberInstead);
+        Assert.isTrue(btnUseMobileNumberInstead.isDisplayed(), "Element is not present");
     }
 
     public void selectMobileCode(String mobileCode) {
@@ -81,6 +82,19 @@ public class LoginPage {
         } else {
             BaseUtils.clickOnElement(americanCodeNumber);
         }
+    }
+
+    public boolean validateIfPreviouslySignedUp() {
+        BaseUtils.clickOnElement(LoginPage.btnDoneKeyboard);
+        try {
+            return btnUseMobileNumberInstead.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void tapsOnContinue() {
+        BaseUtils.clickOnElement(btnContinue);
     }
 
 }

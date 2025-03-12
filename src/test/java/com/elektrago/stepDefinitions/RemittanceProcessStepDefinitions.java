@@ -3,7 +3,7 @@ package com.elektrago.stepDefinitions;
 import java.io.File;
 import java.io.IOException;
 
-import com.elektrago.utils.BaseUtils;
+import com.github.javafaker.Faker;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;
@@ -13,6 +13,8 @@ public class RemittanceProcessStepDefinitions {
     LoginStepDefinitions loginStepDefinitions = new LoginStepDefinitions();
     RemittanceStepDefinitions remittanceStepDefinitions = new RemittanceStepDefinitions();
     ChoosearecipientStepDefinitions choosearecipientStepDefinitions = new ChoosearecipientStepDefinitions();
+    AddRecipientStepDefinitions addRecipientStepDefinitions = new AddRecipientStepDefinitions();
+    RecipientStepDefinitions recipientStepDefinitions = new RecipientStepDefinitions();
     ConfirmrecipientStepDefinitions confirmrecipientStepDefinitions = new ConfirmrecipientStepDefinitions();
     DeliverymethodStepDefinitions deliverymethodStepDefinitions = new DeliverymethodStepDefinitions();
     DirecttobankStepDefinitions directtobankStepDefinitions = new DirecttobankStepDefinitions();
@@ -72,7 +74,7 @@ public class RemittanceProcessStepDefinitions {
                 payerBranch();
             }
 
-            paymentMethodSteps(paymentMethod);
+            paymentMethodSteps(platform, paymentMethod);
 
             reviewAndSend(country, promoCode);
         }
@@ -81,7 +83,7 @@ public class RemittanceProcessStepDefinitions {
     }
 
     @Then("run Remittance Lite tests")
-    public void runRemittanceLitetests() {
+    public void runRemittanceLiteTests() {
         String platform = platformsData.get("platforms").get(0).get("name").asText();
 
         for (JsonNode remittanceData : remittancesData.get("remittances").get(1).get("cases")) {
@@ -131,6 +133,53 @@ public class RemittanceProcessStepDefinitions {
         loginStepDefinitions.theUserLogsOut();
     }
 
+    @Then("run first test Remittance Lite")
+    public void runFirstTestRemittanceLite() {
+        Faker faker = new Faker();
+        String platform = platformsData.get("platforms").get(0).get("name").asText();
+
+        String country = remittancesData.get("remittances").get(1).get("cases").get(0).get("country").asText();
+        String amount = remittancesData.get("remittances").get(1).get("cases").get(0).get("amount").asText();
+        String deliveryMethod = remittancesData.get("remittances").get(1).get("cases").get(0).get("deliveryMethod").asText();
+        String state = remittancesData.get("remittances").get(1).get("cases").get(0).get("state").asText();
+        String institution = remittancesData.get("remittances").get(1).get("cases").get(0).get("institution").asText();
+        Boolean isAdditionalFieldRequired = remittancesData.get("remittances").get(1).get("cases").get(0).get("isAdditionalFieldRequired").asBoolean();
+        Boolean isPayerBranchRequired = remittancesData.get("remittances").get(1).get("cases").get(0).get("isPayerBranchRequired").asBoolean();
+        String recipientPhoneNumber = faker.phoneNumber().cellPhone();
+        String recipientFirstName = faker.name().firstName();
+        String recipientMiddleName = faker.name().nameWithMiddle();
+        String recipientLastName = faker.name().lastName();
+        String recipientSecondLastName = faker.name().lastName();
+        String paymentMethod = remittancesData.get("remittances").get(1).get("cases").get(0).get("paymentMethod").asText();
+        String accountNumber = remittancesData.get("remittances").get(1).get("cases").get(0).get("accountNumber").asText();
+        String senderIdNumber = remittancesData.get("remittances").get(1).get("cases").get(0).get("senderIdNumber").asText();
+        String promoCode = remittancesData.get("remittances").get(1).get("cases").get(0).get("promoCode").asText();
+        remittanceSetup(platform, country, amount);
+        createRecipient(platform, recipientPhoneNumber, recipientFirstName, recipientMiddleName, recipientLastName, recipientSecondLastName);
+        recipient(platform);
+        if (deliveryMethod.equals("Cash Pickup")) {
+            deliveryMethodCashPickup(state, institution);
+        }
+
+        if (deliveryMethod.equals("Account Credit")) {
+            deliveryMethodAccountCredit(state, institution, accountNumber, senderIdNumber);
+        }
+        if (deliveryMethod.equals("Direct to App")) {
+            deliveryMethodDirectToApp(state, institution);
+        }
+        if (deliveryMethod.equals("Home Delivery")) {
+            deliveryMethodHomeDelivery(state, institution);
+        }
+
+        if (isPayerBranchRequired) {
+            payerBranch();
+        }
+
+        paymentMethodStepsLite(paymentMethod);
+        cardDetails(platform, "4895142232120006", "12/31", "321");
+        reviewAndSendLite(country, promoCode);
+    }
+
     private void reviewAndSend(String country, String promoCode) {
         reviewandsendStepDefinitions.theUserFillsPromoCode(country, promoCode);
         reviewandsendStepDefinitions.theUserTapsOnSendNowButton();
@@ -140,28 +189,31 @@ public class RemittanceProcessStepDefinitions {
 
     private void reviewAndSendLite(String country, String promoCode) {
         reviewandsendStepDefinitions.theUserFillsPromoCode(country, promoCode);
-        reviewandsendStepDefinitions.theUserTapsOnContinueButton();
+        reviewandsendStepDefinitions.theUserTapsOnSendNowButton();
         reviewandsendStepDefinitions.theUserTapsOnGotIt();
         reviewandsendStepDefinitions.theUserTapsOnCancel();
     }
 
-    private void cardDetails() {
+    private void cardDetails(String platform, String cardNumber, String expiration, String cvv) {
+        carddetailsStepDefinitions.theUserEntersCardNumber(platform, cardNumber);
+        carddetailsStepDefinitions.theUserEntersExpirationDate(expiration);
+        carddetailsStepDefinitions.theUserEntersCVV(cvv);
         carddetailsStepDefinitions.theUserTapsOnContinueButtonCD();
     }
 
-    private void paymentMethodSteps(String paymentMethod) {
+    private void paymentMethodSteps(String platform, String paymentMethod) {
         if (paymentMethod.equals("WALLET")) {
             paymentmethodStepDefinitions.theUserTapsOnWalletButton();
         }
 
         if (paymentMethod.equals("Saved Card")) {
             paymentmethodStepDefinitions.theUserTapsOnTheFirstCardAvailable();
-            cardDetails();
+            cardDetails(platform, "4000056655665556", "12/29", "123");
         }
 
         if (paymentMethod.equals("New Card")) {
             paymentmethodStepDefinitions.theUserTapsOnNewCardButton();
-            cardDetails();
+            cardDetails(platform, "4000056655665556", "12/29", "124");
         }
 
         if (paymentMethod.equals("Apple Pay")) {
@@ -221,7 +273,6 @@ public class RemittanceProcessStepDefinitions {
         deliveryMethod(state, institution);
     }
 
-
     private void deliveryMethodCashPickup(String state, String institution) {
         deliverymethodStepDefinitions.theUserTapsOnCashPickup();
 
@@ -235,6 +286,20 @@ public class RemittanceProcessStepDefinitions {
         deliveryMethod(state, institution);
 
         directToBank(accountNumber, institution, senderIdNumber);
+    }
+
+    private void recipient(String platform) {
+        recipientStepDefinitions.theUserTapsOnAddedRecipient(platform);
+    }
+
+    private void createRecipient(String platform, String recipientPhoneNumber, String recipientFirstName, String recipientMiddleName, String recipientLastName, String recipientSecondLastName) {
+        addRecipientStepDefinitions.addsRecipient(platform);
+        addRecipientStepDefinitions.entersMobilePhoneNumber(recipientPhoneNumber);
+        addRecipientStepDefinitions.entersFirstName(recipientFirstName);
+        addRecipientStepDefinitions.entersMiddleName(recipientMiddleName);
+        addRecipientStepDefinitions.entersLastName(recipientLastName);
+        addRecipientStepDefinitions.entersSecondLastName(recipientSecondLastName);
+        addRecipientStepDefinitions.tapsOnAddButton();
     }
 
     private void choosearecipient() {

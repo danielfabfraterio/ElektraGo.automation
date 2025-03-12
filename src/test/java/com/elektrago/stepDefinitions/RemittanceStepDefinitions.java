@@ -30,9 +30,12 @@ public class RemittanceStepDefinitions {
         BaseUtils.waitUntilElementisPresent(homePage.inputSendAmount);
         homePage.inputSendAmount.clear();
         BaseUtils.fillUpField(homePage.inputSendAmount, amount);
-        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
-            BaseUtils.waitUntilElementIsClickable(homePage.btnDoneKeyboard);
-            BaseUtils.clickOnElement(homePage.btnDoneKeyboard);
+        try {
+            if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
+                BaseUtils.waitUntilElementIsClickable(homePage.btnDoneKeyboard);
+                BaseUtils.clickOnElement(homePage.btnDoneKeyboard);
+            }
+        } catch (Exception ignored) {
         }
     }
 

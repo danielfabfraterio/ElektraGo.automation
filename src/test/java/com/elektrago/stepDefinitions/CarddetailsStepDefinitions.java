@@ -10,12 +10,26 @@ public class CarddetailsStepDefinitions {
     AppiumDriver driver;
     CardDetailsPage cardDetailsPage;
 
-    @Given("the user taps on continue button CD")
-    public void theUserTapsOnContinueButtonCD() {
-        driver = AppiumDriverFactory.getDriver("iOS");
+    @Given("on {string} the user enters card number: {string}")
+    public void theUserEntersCardNumber(String platform, String cardNumber) {
+        driver = AppiumDriverFactory.getDriver(platform);
         cardDetailsPage = new CardDetailsPage();
         cardDetailsPage.validateCardDetailsPage();
-        cardDetailsPage.btnContinue.click();
-        ;
+        cardDetailsPage.setInputCardNumber(cardNumber);
+    }
+
+    @Given("the user enters expiration date: {string}")
+    public void theUserEntersExpirationDate(String expiration) {
+        cardDetailsPage.setInputExpiration(expiration);
+    }
+
+    @Given("the user enters CVV: {string}")
+    public void theUserEntersCVV(String cvv) {
+        cardDetailsPage.setInputCVV(cvv);
+    }
+
+    @Given("the user taps on continue button CD")
+    public void theUserTapsOnContinueButtonCD() {
+        cardDetailsPage.clickContinue();
     }
 }
