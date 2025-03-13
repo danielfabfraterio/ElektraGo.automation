@@ -21,6 +21,7 @@ public class OnboardingProcessStepDefinitions {
     YouAreNowReadyStepDefinitions youAreNowReadyStepDefinitions = new YouAreNowReadyStepDefinitions();
     HomeStepDefinitions homeStepDefinitions = new HomeStepDefinitions();
     RemittanceProcessStepDefinitions remittanceProcessStepDefinitions = new RemittanceProcessStepDefinitions();
+    ProfileStepDefinitions profileStepDefinitions = new ProfileStepDefinitions();
 
     private JsonNode platformsData;
     private JsonNode onboardingData;
@@ -65,13 +66,20 @@ public class OnboardingProcessStepDefinitions {
             onboardingSetup(platform);
             signupInfo(platform, email, phoneNumber);
             offersAndExclusives(platform);
+
             verifyEmail(platform, otp);
             enterInfo(platform, firstName, middleName, lastName, secondLastName, day, month, year, streetAndNumber, buildOrDept);
             letsGo(platform);
             home(platform);
             remittanceProcessStepDefinitions.loadTestData();
             remittanceProcessStepDefinitions.runFirstTestRemittanceLite();
+            home(platform);
         }
+    }
+
+    private void logout() {
+        homeStepDefinitions.theUserTapsOnProfile();
+        profileStepDefinitions.tapOnLogout();
     }
 
     private void home(String platform) {

@@ -36,7 +36,13 @@ public class SignUpPage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeImage[@name=\"uniteller_powered_logo\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton")
     private WebElement linkLoginHere;
 
-    public SignUpPage(){
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@name=\"You already have an Elektrago account\"]")
+    private WebElement textAccountExists;
+
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Later\"]")
+    private WebElement btnLater;
+
+    public SignUpPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
@@ -47,5 +53,15 @@ public class SignUpPage {
 
     public void tapsOnContinue() {
         btnContinue.click();
+    }
+
+    public void validateAccountExists() {
+        BaseUtils.waitUntilElementisPresent(textAccountExists);
+        Assert.isTrue(textAccountExists.isDisplayed(), "Element is not present");
+    }
+
+    public void tapsOnLater() {
+        BaseUtils.waitUntilElementisPresent(btnLater);
+        BaseUtils.clickOnElement(btnLater);
     }
 }

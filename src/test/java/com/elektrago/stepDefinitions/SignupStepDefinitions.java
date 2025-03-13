@@ -36,4 +36,9 @@ public class SignupStepDefinitions {
     public void theUserTapsOnContinue() {
         signUpPage.tapsOnContinue();
     }
+
+    @Then("the user taps on Later")
+    public void theUserTapsOnLater() {
+        signUpPage.tapsOnLater();
+    }
 }

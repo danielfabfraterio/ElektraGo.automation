@@ -7,13 +7,18 @@ import io.cucumber.java.en.Given;
 import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
 public class HomeStepDefinitions {
-  AppiumDriver driver;
-  HomePage homePage;
+    AppiumDriver driver;
+    HomePage homePage;
 
-  @Given("the user is on {string} the home page")
-  public void theUserIsOnTheHomePage(String device) {
-    driver = getDriver(device);
-    homePage = new HomePage();
-    homePage.validateFirstName();
-  }
+    @Given("the user is on {string} the home page")
+    public void theUserIsOnTheHomePage(String device) {
+        driver = getDriver(device);
+        homePage = new HomePage();
+        homePage.validateFirstName();
+    }
+
+    @Given("the user taps on profile")
+    public void theUserTapsOnProfile() {
+        homePage.tapOnProfile();
+    }
 }

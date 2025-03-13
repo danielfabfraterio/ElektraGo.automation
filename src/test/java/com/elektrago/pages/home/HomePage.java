@@ -27,7 +27,7 @@ public class HomePage {
     @AndroidFindBy(id = "com.elektrago.elektrago:id/action_map")
     @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
     public WebElement mapsAtm;
-  
+
     @AndroidFindBy(id = "com.elektrago.elektrago:id/panel_spin")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTextField")
     public WebElement btnSelectCountry;
@@ -36,18 +36,21 @@ public class HomePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeSearchField[`name == \"Search country\"`]")
     public WebElement inputCountry;
 
-    @AndroidFindBy(xpath= "(//android.view.ViewGroup[@resource-id=\"com.elektrago.elektrago:id/container\"])[1]")
+    @AndroidFindBy(xpath = "(//android.view.ViewGroup[@resource-id=\"com.elektrago.elektrago:id/container\"])[1]")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeTable/XCUIElementTypeCell")
     public WebElement btnFilteredCountry;
 
-    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]")
     public WebElement textFirstName;
 
-    @iOSXCUITFindBy(iOSClassChain= "**/XCUIElementTypeStaticText[`name == \"Currency exchange rate\"`]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Currency exchange rate\"`]")
     public WebElement textCurrencyExchangeRate;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Later\"`]")
     private WebElement btnLater;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Profile\"`]")
+    private WebElement btnProfile;
 
     public HomePage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
@@ -66,10 +69,15 @@ public class HomePage {
     public void validateFirstName() {
         try {
             BaseUtils.clickOnElement(btnLater);
-        } catch(Exception ignored) {
+        } catch (Exception ignored) {
 
         }
         BaseUtils.waitUntilElementisPresent(textFirstName);
         Assert.isTrue(textFirstName.isDisplayed(), "Element is not present");
+    }
+
+    public void tapOnProfile() {
+        BaseUtils.waitUntilElementIsClickable(btnProfile);
+        BaseUtils.clickOnElement(btnProfile);
     }
 }

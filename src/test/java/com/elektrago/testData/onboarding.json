@@ -1,13 +1,11 @@
 {
   "cases": [
-    "success",
-    "usedEmail",
-    "usedPhoneNumber"
+    "success"
   ],
   "registerData": {
     "login": {
-      "email": "a+2503051225@fraternitas.io",
-      "phoneNumber": "2503051225",
+      "email": "a+2503051226@fraternitas.io",
+      "phoneNumber": "2503051226",
       "otp": "000000"
     },
     "birthdate": {
