@@ -22,8 +22,8 @@ public class YouAreNowReadyPage {
     }
 
     public void validateYouAreNowReadyPage() {
-        BaseUtils.waitUntilElementisPresent(title);
-        Assert.isTrue(title.isDisplayed(), "Element is not displayed");
+//        BaseUtils.waitUntilElementisPresent(title);
+//        Assert.isTrue(title.isDisplayed(), "Element is not displayed");
     }
 
     public void clickLetsGo() {

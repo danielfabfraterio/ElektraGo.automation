@@ -36,7 +36,7 @@ public class LoginStepDefinitions {
     public void theLoginPageIsShowsOnTheApp() {
         loginPage = new LoginPage();
         loginPage.validateLoginPage();
-        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
             LoginPage.btnDoneKeyboard.click();
         }
     }
@@ -49,6 +49,11 @@ public class LoginStepDefinitions {
             LoginPage.btnDoneKeyboard.click();
         }
         loginPage.tapsOnContinue();
+    }
+
+    @And("the user taps on the Forgot Password button")
+    public void theUserTapOnTheForgotPasswordButton() {
+        loginPage.tapsOnForgotPassword();
     }
 
     @And("the password {string}")
@@ -80,12 +85,28 @@ public class LoginStepDefinitions {
 
     @And("the user tap the link to use mobile number")
     public void theUserTapTheLinkToUseMobileNumber() {
-        BaseUtils.clickOnElement(loginPage.btnUseMobileNumberInstead);
+        try {
+            BaseUtils.clickOnElement(loginPage.btnUseMobileNumberInstead);
+        } catch (Exception ignored) {
+        }
+    }
+
+    @And("the user taps use email instead")
+    public void theUserTapsUseEmailInstead() {
+        try {
+            BaseUtils.clickOnElement(loginPage.btnUseEmailInstead);
+        } catch (Exception ignored) {
+        }
     }
 
     @And("the user fill up the mobile field with {string}")
     public void theUserFillUpTheMobileFieldWith(String number) {
-        loginPage.inputMobileNumber.sendKeys(number);
+        loginPage.inputMobileNumber.clear();
+        BaseUtils.fillUpField(loginPage.inputMobileNumber, number);
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
+            LoginPage.btnDoneKeyboard.click();
+        }
+        BaseUtils.clickOnElement(loginPage.btnContinue);
     }
 
     @When("the user select the mobile code {string}")
@@ -112,5 +133,10 @@ public class LoginStepDefinitions {
         homeLitePage.btnMenu.click();
         homeLitePage.btnLogout.click();
         homeLitePage.btnConfirmLogout.click();
+    }
+
+    @Then("the user taps on Close button")
+    public void theUserTapsOnBtnClose() {
+        loginPage.tapsOnBtnClose();
     }
 }

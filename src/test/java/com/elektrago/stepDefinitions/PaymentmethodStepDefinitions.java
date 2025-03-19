@@ -35,7 +35,7 @@ public class PaymentmethodStepDefinitions {
         driver = getDriver("iOS");
         paymentMethodPage = new PaymentMethodPage();
         BaseUtils.waitUntilElementIsClickable(paymentMethodPage.firstCardAvailableLite);
-        paymentMethodPage.firstCardAvailableLite.click();
+        BaseUtils.clickOnElement(paymentMethodPage.firstCardAvailableLite);
         ;
     }
 

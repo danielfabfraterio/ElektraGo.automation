@@ -13,7 +13,7 @@ public class ConfirmrecipientStepDefinitions {
 
     @Given("the user taps on confirm button")
     public void theUserTapsOnConfirmButton() {
-        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("ios")) {
+        if (AppiumDriverFactory.getDevice().equalsIgnoreCase("iOS")) {
             driver = getDriver("iOS");
             confirmrecipientPage = new ConfirmrecipientPage();
             confirmrecipientPage.tapsOnConfirmButton();

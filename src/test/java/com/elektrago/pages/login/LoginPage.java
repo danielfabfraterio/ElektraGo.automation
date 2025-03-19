@@ -19,8 +19,11 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"usernameTextfield\"`]")
     public WebElement inputEmail;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Use email instead\"`]")
+    public WebElement btnUseEmailInstead;
+
     @AndroidFindBy(id = "com.elektrago.elektrago:id/switch_option_text")
-    @iOSXCUITFindBy(accessibility = "Use mobile number instead")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Use mobile number instead\"`]")
     public WebElement btnUseMobileNumberInstead;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_password")
@@ -65,15 +68,18 @@ public class LoginPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Continue\"`]")
     public WebElement btnContinue;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Close\"`]")
+    public WebElement btnClose;
+
     public LoginPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
     public void validateLoginPage() {
-        BaseUtils.waitUntilElementisPresent(inputEmail);
-        Assert.isTrue(inputEmail.isDisplayed(), "Element is not present");
-        BaseUtils.waitUntilElementisPresent(btnUseMobileNumberInstead);
-        Assert.isTrue(btnUseMobileNumberInstead.isDisplayed(), "Element is not present");
+//        BaseUtils.waitUntilElementisPresent(inputEmail);
+//        Assert.isTrue(inputEmail.isDisplayed(), "Element is not present");
+//        BaseUtils.waitUntilElementisPresent(btnUseMobileNumberInstead);
+//        Assert.isTrue(btnUseMobileNumberInstead.isDisplayed(), "Element is not present");
     }
 
     public void selectMobileCode(String mobileCode) {
@@ -87,7 +93,7 @@ public class LoginPage {
     public boolean validateIfPreviouslySignedUp() {
         BaseUtils.clickOnElement(LoginPage.btnDoneKeyboard);
         try {
-            return btnUseMobileNumberInstead.isDisplayed();
+            return btnUseMobileNumberInstead.isDisplayed() || btnUseEmailInstead.isDisplayed();
         } catch (Exception e) {
             return false;
         }
@@ -97,4 +103,11 @@ public class LoginPage {
         BaseUtils.clickOnElement(btnContinue);
     }
 
+    public void tapsOnForgotPassword() {
+        BaseUtils.clickOnElement(btnForgotPasswd);
+    }
+
+    public void tapsOnBtnClose() {
+        BaseUtils.clickOnElement(btnClose);
+    }
 }

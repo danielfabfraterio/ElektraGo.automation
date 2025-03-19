@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 public class SignUpPage {
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/input_email")
-    @iOSXCUITFindBy(accessibility = "Registration")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeTextField[`name == \"Registration\"`]")
     public WebElement inputEmail;
 
     @AndroidFindBy(id = "com.elektrago.elektrago:id/relativeLayout")

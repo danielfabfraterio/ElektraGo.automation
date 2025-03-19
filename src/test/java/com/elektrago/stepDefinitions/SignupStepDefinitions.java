@@ -21,8 +21,13 @@ public class SignupStepDefinitions {
         if (loginPage.validateIfPreviouslySignedUp()) {
             BaseUtils.clickOnElement(loginPage.SignUpHere);
         }
+        try {
+            BaseUtils.clickOnElement(loginPage.SignUpHere);
+        } catch (Exception ignored) {
+        }
         signUpPage = new SignUpPage();
         signUpPage.validateSignupPage();
+//        BaseUtils.clickOnElement(loginPage.btnUseEmailInstead);
         BaseUtils.fillUpField(signUpPage.inputEmail, email);
     }
 

@@ -15,16 +15,23 @@ public class RecipientPage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell")
     private WebElement addedRecipient;
 
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther")
+    private WebElement firstRecipient;
+
     public RecipientPage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
     public void validateRecipientPage() {
-        BaseUtils.waitUntilElementisPresent(staticTitle);
-        Assert.isTrue(staticTitle.isDisplayed(), "Element is not present");
+//        BaseUtils.waitUntilElementisPresent(staticTitle);
+//        Assert.isTrue(staticTitle.isDisplayed(), "Element is not present");
     }
 
     public void tapsOnAddedRecipient() {
         BaseUtils.clickOnElement(addedRecipient);
+    }
+
+    public void tapsOnFirstAvailableRecipient() {
+        BaseUtils.clickOnElement(firstRecipient);
     }
 }

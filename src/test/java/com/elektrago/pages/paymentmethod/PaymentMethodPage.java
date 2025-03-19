@@ -12,7 +12,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
 public class PaymentMethodPage {
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Payment method\"`]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Choose a card\"`]")
     public WebElement title;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Elektra Go Card\"`]")
@@ -26,7 +26,7 @@ public class PaymentMethodPage {
     public WebElement firstCardAvailableLite;
 
     @AndroidFindBy(uiAutomator="new UiSelector().className(\"android.view.ViewGroup\").instance(9)")
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeTable/XCUIElementTypeCell")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Add card\"`]")
     public WebElement btnNewCard;
 
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`name == \"Apple Pay\"`]")

@@ -49,7 +49,7 @@ public class HomePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Later\"`]")
     private WebElement btnLater;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Profile\"`]")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeImage[`name == \"img_avatar_gray\"`]")
     private WebElement btnProfile;
 
     public HomePage() {

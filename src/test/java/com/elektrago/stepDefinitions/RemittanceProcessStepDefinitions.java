@@ -100,15 +100,10 @@ public class RemittanceProcessStepDefinitions {
             String promoCode = remittanceData.get("promoCode").asText();
 
             remittanceSetup(platform, country, amount);
-
-            choosearecipient();
-
-            confirmRecipient();
-
+            recipient(platform);
             if (deliveryMethod.equals("Cash Pickup")) {
                 deliveryMethodCashPickup(state, institution);
             }
-
             if (deliveryMethod.equals("Account Credit")) {
                 deliveryMethodAccountCredit(state, institution, accountNumber, senderIdNumber);
             }
@@ -120,17 +115,13 @@ public class RemittanceProcessStepDefinitions {
                 deliveryMethodHomeDelivery(state, institution);
                 break;
             }
-
             if (isPayerBranchRequired) {
                 payerBranch();
             }
-
             paymentMethodStepsLite(paymentMethod);
-
             reviewAndSendLite(country, promoCode);
+//            TODO Add Cancel Remittance proccess
         }
-
-        loginStepDefinitions.theUserLogsOut();
     }
 
     @Then("run first test Remittance Lite")
@@ -147,7 +138,7 @@ public class RemittanceProcessStepDefinitions {
         Boolean isPayerBranchRequired = remittancesData.get("remittances").get(1).get("cases").get(0).get("isPayerBranchRequired").asBoolean();
         String recipientPhoneNumber = faker.phoneNumber().cellPhone();
         String recipientFirstName = faker.name().firstName();
-        String recipientMiddleName = faker.name().nameWithMiddle();
+        String recipientMiddleName = faker.name().firstName();
         String recipientLastName = faker.name().lastName();
         String recipientSecondLastName = faker.name().lastName();
         String paymentMethod = remittancesData.get("remittances").get(1).get("cases").get(0).get("paymentMethod").asText();

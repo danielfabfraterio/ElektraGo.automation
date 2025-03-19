@@ -12,19 +12,26 @@ public class ProfilePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeStaticText[`value == \"First name\"]`]")
     private WebElement textFirstName;
 
-    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Logout\"]`")
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Log out\"`]")
     private WebElement btnLogout;
+
+    @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeButton[`name == \"Log out\"`][2]")
+    private WebElement btnLogoutConfirmation;
 
     public ProfilePage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
 
     public void validateProfilePage() {
-        BaseUtils.waitUntilElementisPresent(textFirstName);
-        Assert.isTrue(textFirstName.isDisplayed(), "Element is not present");
+        BaseUtils.waitUntilElementisPresent(btnLogout);
+        Assert.isTrue(btnLogout.isDisplayed(), "Element is not present");
     }
 
     public void tapOnLogout() {
         BaseUtils.clickOnElement(btnLogout);
+    }
+
+    public void tapOnLogoutConfirmation() {
+        BaseUtils.clickOnElement(btnLogoutConfirmation);
     }
 }

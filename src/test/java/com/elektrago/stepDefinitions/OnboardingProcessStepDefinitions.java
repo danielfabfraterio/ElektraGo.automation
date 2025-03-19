@@ -58,6 +58,7 @@ public class OnboardingProcessStepDefinitions {
             String otp = onboardingUserData.get("login").get("otp").asText();
             String password = onboardingUserData.get("passwords").get("password").asText();
             String passwordConfirm = onboardingUserData.get("passwords").get("passwordConfirm").asText();
+//            TODO Add mobile Code
             String phoneNumber = onboardingUserData.get("login").get("phoneNumber").asText();
             String secondLastName = faker.name().lastName();
             String streetAndNumber = onboardingUserData.get("address").get("streetAndNumber").asText();

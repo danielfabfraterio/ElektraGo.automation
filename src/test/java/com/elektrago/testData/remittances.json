@@ -76,10 +76,10 @@
                 {
                     "country": "Mexico",
                     "amount": "3000",
-                    "state": "Baja",
+                    "state": "DF",
                     "institution": "Elektra",
                     "deliveryMethod": "Cash Pickup",
-                    "paymentMethod": "Saved Card",
+                    "paymentMethod": "New Card",
                     "accountNumber": "0123456789012345",
                     "senderIdNumber": "0123456789",
                     "promoCode": "PACO",
