@@ -3,3 +3,4 @@
 .windsurfrules
 /target
 *.class
+/.vscode
