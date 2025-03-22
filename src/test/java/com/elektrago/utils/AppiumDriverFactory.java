@@ -1,14 +1,16 @@
 package com.elektrago.utils;
 
-import com.elektrago.pages.DeviceCapabilities;
-import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import com.elektrago.pages.DeviceCapabilities;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import io.appium.java_client.AppiumDriver;
 
 public class AppiumDriverFactory {
     private static AppiumDriver driver;
@@ -46,12 +48,12 @@ public class AppiumDriverFactory {
                 capabilities.setCapability("appium:usePrebuiltWDA", true);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error al leer el archivo de capabilities: " + e.getMessage());
         }
         try {
-            return new AppiumDriver(new URL("http://127.0.0.1:4723/"), capabilities);
+            return new AppiumDriver(URI.create("http://127.0.0.1:4723/").toURL(), capabilities);
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error al crear el driver: " + e.getMessage());
         }
     }
 

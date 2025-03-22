@@ -1,15 +1,13 @@
 package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.home.HomePage;
-
-import com.elektrago.pages.login.LoginPage;
 import com.elektrago.utils.AppiumDriverFactory;
+import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 import com.elektrago.utils.BaseUtils;
+
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-
-import static com.elektrago.utils.AppiumDriverFactory.getDriver;
 
 public class RemittanceStepDefinitions {
     AppiumDriver driver;

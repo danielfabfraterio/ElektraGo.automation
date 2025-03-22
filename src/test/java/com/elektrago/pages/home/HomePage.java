@@ -27,6 +27,10 @@ public class HomePage {
     @AndroidFindBy(id = "com.elektrago.elektrago:id/action_map")
     @iOSXCUITFindBy(accessibility = "ic_tb_map_unselected")
     public WebElement mapsAtm;
+
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/action_send")
+    @iOSXCUITFindBy(accessibility = "")
+    public WebElement sendMoney;
   
     @AndroidFindBy(id = "com.elektrago.elektrago:id/panel_spin")
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeTextField")

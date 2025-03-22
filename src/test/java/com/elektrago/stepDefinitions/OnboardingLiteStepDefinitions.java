@@ -1,4 +1,4 @@
-package com.elektrago.stepDefinitions;
+/* package com.elektrago.stepDefinitions;
 
 import com.elektrago.pages.cover.CoverPage;
 import com.elektrago.pages.home.HomeLitePage;
@@ -217,3 +217,4 @@ public class OnboardingLiteStepDefinitions {
 
 
 }
+ */
