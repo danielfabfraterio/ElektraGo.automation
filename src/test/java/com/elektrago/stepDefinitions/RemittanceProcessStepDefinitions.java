@@ -3,7 +3,6 @@ package com.elektrago.stepDefinitions;
 import java.io.File;
 import java.io.IOException;
 
-import com.elektrago.utils.BaseUtils;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.en.Given;

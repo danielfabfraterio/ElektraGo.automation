@@ -40,6 +40,10 @@ public class HomePage {
     @iOSXCUITFindBy(iOSClassChain = "**/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeTable/XCUIElementTypeCell")
     public WebElement btnFilteredCountry;
 
+    @AndroidFindBy(id = "com.elektrago.elektrago:id/button_profile")
+    @iOSXCUITFindBy(accessibility = "img_avatar_gray")
+    public  WebElement btnProfileImage;
+
     public HomePage() {
         PageFactory.initElements(new AppiumFieldDecorator(AppiumDriverFactory.getDriver()), this);
     }
